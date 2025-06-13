@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -24,6 +25,8 @@ const Main = () => {
   const [modalVisibleRoom, setModalVisibleRoom] = useState(false);
   const [modalVisibleAI, setModalVisibleAI] = useState(false);
   const [modalVisibleStyle, setModalVisibleStyle] = useState(false);
+  const [selectedPhotoUri, setSelectedPhotoUri] = useState(null);
+
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -36,12 +39,44 @@ const Main = () => {
     loadFonts();
   }, []);
 
-  function selectedphoto() {
-    setSelectedPhoto((pre) => !pre);
-  }
   const selectedStyleObj = stylesList.find(
     (item) => item.name === selectedThird
   );
+  const openCamera = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permissionResult.granted) {
+      alert("Permission to access camera is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedPhotoUri(result.assets[0].uri);
+    }
+  };
+
+  const openGallery = async () => {
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      alert("Permission to access media library is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedPhotoUri(result.assets[0].uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -53,51 +88,54 @@ const Main = () => {
           <Text style={styles.buttonText}>Upgrade </Text>
         </TouchableOpacity>
       </View>
-
-      <ImageBackground
-        source={require("../../assets/images/background.png")}
-        style={styles.selectphoto}
-      >
+      {selectedPhotoUri ? (
         <Image
-          source={require("../../assets/images/intertwo.png")}
-          style={styles.phototwo}
-          resizeMode="contain"
+          source={{ uri: selectedPhotoUri }}
+          style={[styles.selectphotouser, { resizeMode: "cover" }]}
         />
-        <Image
-          source={require("../../assets/images/interone.png")}
-          style={styles.photoone}
-          resizeMode="contain"
-        />
-        <View style={styles.textphoto}>
-          <Text style={styles.maintext}>Select a photo</Text>
-          <Text style={styles.secondtext}>
-            Try to include all the important{"\n"}angles in a well-lit
-            environment
-          </Text>
+      ) : (
+        <ImageBackground
+          source={require("../../assets/images/background.png")}
+          style={styles.selectphoto}
+        >
+          <Image
+            source={require("../../assets/images/intertwo.png")}
+            style={styles.phototwo}
+            resizeMode="contain"
+          />
+          <Image
+            source={require("../../assets/images/interone.png")}
+            style={styles.photoone}
+            resizeMode="contain"
+          />
+          <View style={styles.textphoto}>
+            <Text style={styles.maintext}>Select a photo</Text>
+            <Text style={styles.secondtext}>
+              Try to include all the important{"\n"}angles in a well-lit
+              environment
+            </Text>
 
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.buttonphoto}
-              onPress={selectedphoto}
-            >
-              <Text style={styles.symbol}>
-                <Feather name="camera" size={24} color="black" />
-              </Text>
-              <Text style={styles.photoText}> from camera</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.buttonphoto}
-              onPress={selectedphoto}
-            >
-              <Text style={styles.symbol}>
-                <MaterialIcons name="photo-library" size={24} color="black" />
-              </Text>
-              <Text style={styles.photoText}> from gallery</Text>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+              <TouchableOpacity style={styles.buttonphoto} onPress={openCamera}>
+                <Text style={styles.symbol}>
+                  <Feather name="camera" size={24} color="black" />
+                </Text>
+                <Text style={styles.photoText}> from camera</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.buttonphoto}
+                onPress={openGallery}
+              >
+                <Text style={styles.symbol}>
+                  <MaterialIcons name="photo-library" size={24} color="black" />
+                </Text>
+                <Text style={styles.photoText}> from gallery</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-
+        </ImageBackground>
+      )}
       <View>
         {/* Room */}
         <TouchableOpacity onPress={() => setModalVisibleRoom(true)}>
@@ -220,7 +258,7 @@ const Main = () => {
       </View>
 
       <View style={styles.bottomButtonWrapper}>
-        {selectedPhoto && (
+        {selectedPhotoUri && (
           <TouchableOpacity
             style={styles.buttonredesign}
             onPress={() => navigation.navigate("Loading")}
@@ -262,7 +300,18 @@ const styles = StyleSheet.create({
     fontFamily: "InstrumentSerif",
     color: "white",
   },
+  selectphotouser: {
+    height: 400,
+    overflow: "hidden",
+    marginLeft: 19,
+    marginTop: 28,
+    marginRight: 19,
+    padding: 30,
+    paddingVertical: 30,
+    borderRadius: 30,
+  },
   selectphoto: {
+    height: 300,
     overflow: "hidden",
     marginLeft: 19,
     marginTop: 28,

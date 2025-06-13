@@ -7,12 +7,12 @@ import {
   FlatList,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const options = [
   {
@@ -22,7 +22,9 @@ const options = [
   },
   {
     id: 2,
-    icon: <MaterialCommunityIcons name="dance-ballroom" size={24} color="black" />,
+    icon: (
+      <MaterialCommunityIcons name="dance-ballroom" size={24} color="black" />
+    ),
     text: "Not achieving the desired look",
   },
   {
@@ -30,17 +32,17 @@ const options = [
     icon: <MaterialIcons name="timer" size={24} color="black" />,
     text: "The process taking too long",
   },
-    {
+  {
     id: 4,
     icon: <Entypo name="emoji-flirt" size={24} color="black" />,
     text: "Not being able to visualize the outcome",
   },
-    {
+  {
     id: 5,
     icon: <FontAwesome6 name="sad-cry" size={24} color="black" />,
     text: "Lack of design expertise",
   },
-    {
+  {
     id: 6,
     icon: <Entypo name="emoji-neutral" size={24} color="black" />,
     text: "Other",
@@ -48,19 +50,14 @@ const options = [
 ];
 
 const TenthScreen = ({ navigation }) => {
-  const [currentIndex] = useState(7);
-
+  const [currentIndex] = useState(6);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.saveButtonWrapper}
-     
-    >
+    <TouchableOpacity style={styles.saveButtonWrapper}>
       <View style={styles.leftContent}>
         {item.icon}
         <Text style={styles.saveButtonText}>{item.text}</Text>
       </View>
-   
     </TouchableOpacity>
   );
 
@@ -84,7 +81,8 @@ const TenthScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
         <Text style={styles.text}>
-       What do you think could{"\n"}make redesigning your{"\n"}home difficult?
+          What do you think could{"\n"}make redesigning your{"\n"}home
+          difficult?
         </Text>
       </View>
       <FlatList
@@ -95,14 +93,14 @@ const TenthScreen = ({ navigation }) => {
       />
 
       <View style={styles.bottomButtonWrapper}>
-         <TouchableOpacity
-           style={styles.buttonredesign}
-           onPress={() => navigation.navigate("Eleventh")}
-         >
-           <View style={styles.buttonredesignContent}>
-             <Text style={styles.buttonredesigntext}>Continue</Text>
-           </View>
-         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonredesign}
+          onPress={() => navigation.navigate("Eleventh")}
+        >
+          <View style={styles.buttonredesignContent}>
+            <Text style={styles.buttonredesigntext}>Continue</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -154,7 +152,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", 
+    justifyContent: "space-between",
     elevation: 1,
     width: "90%",
     marginRight: 16,

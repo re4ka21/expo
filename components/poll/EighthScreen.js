@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-
 const EighthScreen = ({ navigation }) => {
-  const [currentIndex] = useState(5);
-
+  const [currentIndex] = useState(4);
 
   return (
     <View style={styles.container}>
@@ -33,30 +25,32 @@ const EighthScreen = ({ navigation }) => {
             style={styles.arrow}
           />
         </TouchableOpacity>
-    
       </View>
       <View style={styles.main}>
-      <Text style={styles.text}>
-    It’s interesting that
+        <Text style={styles.text}>It’s interesting that</Text>
+        <Text style={styles.texttwo}>
+          A Harvard study found that the quality of{"\n"}living conditions is{" "}
+          <Text style={styles.orangetext}>
+            directly linked to life{"\n"} satisfaction.
+          </Text>
         </Text>
-        <Text style={styles.texttwo}>A Harvard study found that the quality of{"\n"}living conditions is <Text style={styles.orangetext}>directly linked to life{"\n"} satisfaction.</Text></Text>
       </View>
-<View>
-     <Image
-            source={require("../../assets/images/Frame 73.png")}
-            style={styles.photo}
-            resizeMode="cover"
-          />
-</View>
+      <View>
+        <Image
+          source={require("../../assets/images/Frame 73.png")}
+          style={styles.photo}
+          resizeMode="cover"
+        />
+      </View>
       <View style={styles.bottomButtonWrapper}>
-         <TouchableOpacity
-             style={styles.buttonredesign}
-             onPress={() => navigation.navigate("Nineth")}
-           >
-             <View style={styles.buttonredesignContent}>
-               <Text style={styles.buttonredesigntext}>Continue</Text>
-             </View>
-           </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonredesign}
+          onPress={() => navigation.navigate("Nineth")}
+        >
+          <View style={styles.buttonredesignContent}>
+            <Text style={styles.buttonredesigntext}>Continue</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -67,15 +61,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FDFCFC",
   },
- texttwo: {
-  fontSize: 15,
-  textAlign: 'center',
-  marginTop: 10,
-  marginHorizontal: 20, 
-  color: '#000', 
-},
-  orangetext:{
-    color:'#FC632B'
+  texttwo: {
+    fontSize: 15,
+    textAlign: "center",
+    marginTop: 10,
+    marginHorizontal: 20,
+    color: "#000",
+  },
+  orangetext: {
+    color: "#FC632B",
   },
 
   text: {
@@ -83,13 +77,13 @@ const styles = StyleSheet.create({
     fontFamily: "InstrumentSerif",
     marginLeft: 52, // Відступ між іконкою та текстом
     flexShrink: 1, // Дозволяє тексту не виходити за межі
-    marginTop:35,
+    marginTop: 35,
   },
-photo: {
-  width: '100%',
-  height: 250,
-  marginTop:100,
-},
+  photo: {
+    width: "100%",
+    height: 250,
+    marginTop: 100,
+  },
 
   dotsContainer: {
     flexDirection: "row",

@@ -5,104 +5,245 @@ import {
   StyleSheet,
   FlatList,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 const { width } = Dimensions.get("window");
 
 const testimonials = [
-  { id: "1", text: "This app changed my life!", name: "Anna" },
-  { id: "2", text: "Very useful and easy to use.", name: "John" },
-  { id: "3", text: "Highly recommended!", name: "Maria" },
+  {
+    id: "1",
+    text: "Like Having a Pro at home",
+    maintext:
+      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
+    name: "Our user",
+  },
+  {
+    id: "2",
+    text: "Like Having a Pro at home",
+    maintext:
+      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
+    name: "Our user",
+  },
+  {
+    id: "3",
+    text: "Like Having a Pro at home",
+    maintext:
+      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
+    name: "Our user",
+  },
 ];
-const EleventhScreen = () => {
+
+const EleventhScreen = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentDotsIndex = 7; // Якщо це тимчасово — можна видалити
 
-const handleScroll = (event) => {
-  const slideSize = event.nativeEvent.layoutMeasurement.width;
-  const index = Math.round(event.nativeEvent.contentOffset.x / slideSize); 
-  setCurrentIndex(index);
-};
-
+  const handleScroll = (event) => {
+    const slideSize = event.nativeEvent.layoutMeasurement.width;
+    const index = Math.round(event.nativeEvent.contentOffset.x / slideSize);
+    setCurrentIndex(index);
+  };
 
   return (
-    <View style={styles.carouselContainer}>
-      <FlatList
-  data={testimonials}
-  onScroll={handleScroll}
-scrollEventThrottle={16}
-  horizontal
-  pagingEnabled
-    snapToAlignment="center"
-     contentContainerStyle={{ paddingHorizontal: (width * 0.075) }}
-  showsHorizontalScrollIndicator={false}
-  keyExtractor={(item) => item.id}
-  renderItem={({ item }) => (
-    <View style={styles.carouselSlide}>
-      <Text style={styles.reviewText}>"{item.text}"</Text>
-      <Text style={styles.authorText}>— {item.name}</Text>
-    </View>
-  )}
-/>
-      <View style={styles.dots}>
-        {testimonials.map((_, i) => (
+    <View style={styles.container}>
+      {/* Верхній індикатор */}
+      <View style={styles.topDotsContainer}>
+        {[...Array(10)].map((_, i) => (
           <View
             key={i}
             style={[
-              styles.dot,
-              i === currentIndex ? styles.activeDot : null,
+              styles.dotSmall,
+              i === currentDotsIndex && styles.activeDot,
             ]}
           />
         ))}
+      </View>
+
+      {/* Назва та стрілка */}
+      <View style={styles.headerWrapper}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.arrowContainer}
+        >
+          <FontAwesome name="arrow-circle-left" size={32} color="#FC632B" />
+        </TouchableOpacity>
+
+        <View style={styles.textBlock}>
+          <Text style={styles.text}>Thanks for sharing your concerns!</Text>
+          <Text style={styles.texttwo}>
+            <Text style={styles.orangetext}> 83% of our users </Text>reported
+            that Al Remodel{"\n"}helped them redesign their spaces and{"\n"}
+            boosted their life satisfaction.
+          </Text>
+        </View>
+      </View>
+
+      {/* Карусель */}
+      <View style={styles.carouselContainer}>
+        <FlatList
+          style={styles.list}
+          data={testimonials}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+          horizontal
+          pagingEnabled
+          snapToAlignment="center"
+          contentContainerStyle={{ paddingHorizontal: width * 0.075 }}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.carouselSlide}>
+              <View style={styles.starsContainer}>
+                {[...Array(5)].map((_, i) => (
+                  <FontAwesome
+                    key={i}
+                    name="star"
+                    size={18}
+                    color="#FC632B"
+                    style={styles.starIcon}
+                  />
+                ))}
+              </View>
+              <Text style={styles.reviewText}>{item.text}</Text>
+              <Text style={styles.maintext}>{item.maintext}</Text>
+              <Text style={styles.authorText}>{item.name}</Text>
+            </View>
+          )}
+        />
+
+        {/* Індикатори відгуків */}
+        <View style={styles.dots}>
+          {testimonials.map((_, i) => (
+            <View
+              key={i}
+              style={[styles.dot, i === currentIndex && styles.activeDot]}
+            />
+          ))}
+        </View>
+      </View>
+      <View style={styles.bottomButtonWrapper}>
+        <TouchableOpacity
+          style={styles.buttonredesign}
+          onPress={() => navigation.navigate("Twelfth")}
+        >
+          <View style={styles.buttonredesignContent}>
+            <Text style={styles.buttonredesigntext}>Continue</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    flex: 1,
+  },
+  topDotsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 50,
+  },
+  dotSmall: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#ccc",
+    marginHorizontal: 10,
+  },
+  activeDot: {
+    backgroundColor: "#FC632B",
+  },
+  title: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 15,
+    marginTop: 60,
+  },
   carouselContainer: {
-    marginTop: 30,
+    marginTop: 40,
     alignItems: "center",
   },
+  headerWrapper: {
+    marginLeft: 15,
+    marginTop: 60,
+  },
+
+  textBlock: {
+    marginTop: 35,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  starsContainer: {
+    flexDirection: "row",
+
+    marginBottom: 16,
+  },
+
+  starIcon: {
+    marginHorizontal: 2,
+  },
+
+  text: {
+    fontSize: 40,
+    fontFamily: "InstrumentSerif",
+    textAlign: "center",
+  },
+
+  texttwo: {
+    fontSize: 15,
+    textAlign: "center",
+    marginTop: 10,
+    marginHorizontal: 20,
+    color: "#000",
+  },
+
+  orangetext: {
+    color: "#FC632B",
+  },
+
+  arrowContainer: {
+    marginLeft: 15,
+    zIndex: 2,
+  },
+  list: {
+    marginTop: 40,
+    height: 220,
+  },
   carouselSlide: {
-    width: width * 0.85, // кожен слайд займає 85% ширини екрану
-  marginHorizontal: width * 0.0125, // відступи по краях
+    width: width * 0.85,
+    marginHorizontal: width * 0.0125,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 20,
     backgroundColor: "white",
     paddingVertical: 25,
     paddingHorizontal: 30,
-    justifyContent: "center",
-    alignItems: "center",
+
     elevation: 2,
+    height: 205, // 🧩 додаємо висоту
   },
+
   reviewText: {
-    fontSize: 16,
-    color: "#000",
-    textAlign: "center",
+    fontSize: 17,
+    color: "#422508",
     marginBottom: 10,
+    fontWeight: "bold",
   },
   authorText: {
     fontSize: 14,
-    color: "#FC632B",
-    fontStyle: "italic",
+    color: "#422508",
   },
-  text: {
-    fontSize: 18,
-    textAlign: "center",
-    fontStyle: "italic",
-    color: "#333",
-  },
-  author: {
-    marginTop: 10,
-    fontWeight: "bold",
-    fontSize: 16,
-    color: "#FC632B",
+  maintext: {
+    fontSize: 14,
+    color: "#422508",
+    marginBottom: 10,
   },
   dots: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 12,
   },
   dot: {
     width: 8,
@@ -111,8 +252,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     marginHorizontal: 4,
   },
-  activeDot: {
+  buttonredesignContent: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonredesigntext: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  buttonredesign: {
     backgroundColor: "#FC632B",
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 10,
+    width: "92%",
+  },
+  bottomButtonWrapper: {
+    position: "absolute",
+    bottom: 60,
+    left: 0,
+    right: 0,
+    alignItems: "center",
   },
 });
 

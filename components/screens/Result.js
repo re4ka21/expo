@@ -14,6 +14,10 @@ import { ImageContext } from "../context/ImageContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import StyleModal from "../modals/Stylemodal";
 import SelectModal from "../modals/Selectmodal";
+import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
+import { Asset } from "expo-asset";
 import { room, rooms, stylesList, styleImages } from "../constants";
 const ResultScreen = () => {
   const navigation = useNavigation();
@@ -43,6 +47,53 @@ const ResultScreen = () => {
   const handlePress = () => {
     navigation.replace("Result");
   };
+  const saveToGallery = async () => {
+    try {
+      const imageModule =
+        styleImages[selectedImages[selectedImages.length - 1]];
+      if (!imageModule) return;
+
+      // Завантажуємо require-зображення у файлову систему
+      const asset = Asset.fromModule(imageModule);
+      await asset.downloadAsync();
+      const localUri = asset.localUri;
+
+      // Запит дозволу
+      const { status } = await MediaLibrary.requestPermissionsAsync();
+      if (status !== "granted") {
+        alert("Permission to access media library is required!");
+        return;
+      }
+
+      await MediaLibrary.saveToLibraryAsync(localUri);
+      alert("Saved to gallery!");
+    } catch (error) {
+      console.error("Error saving to gallery:", error);
+      alert("Failed to save image.");
+    }
+  };
+  const shareImage = async () => {
+    try {
+      const imageModule =
+        styleImages[selectedImages[selectedImages.length - 1]];
+      if (!imageModule) return;
+
+      const asset = Asset.fromModule(imageModule);
+      await asset.downloadAsync();
+      const localUri = asset.localUri;
+
+      const isAvailable = await Sharing.isAvailableAsync();
+      if (!isAvailable) {
+        alert("Sharing is not available on this device");
+        return;
+      }
+
+      await Sharing.shareAsync(localUri);
+    } catch (error) {
+      console.error("Error sharing image:", error);
+      alert("Failed to share image.");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -64,11 +115,18 @@ const ResultScreen = () => {
           />
         )}
         <View style={styles.newbuttons}>
-          <TouchableOpacity style={styles.saveButtonWrapper}>
+          <TouchableOpacity
+            style={styles.saveButtonWrapper}
+            onPress={saveToGallery}
+          >
             <MaterialIcons name="add-photo-alternate" size={24} color="black" />
             <Text style={styles.saveButtonText}>Save to gallery</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.saveButtonWrapper}>
+
+          <TouchableOpacity
+            style={styles.saveButtonWrapper}
+            onPress={shareImage}
+          >
             <Entypo name="share-alternative" size={24} color="black" />
             <Text style={styles.saveButtonText}>Share</Text>
           </TouchableOpacity>

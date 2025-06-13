@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 const options = [
@@ -37,24 +37,17 @@ const options = [
     icon: <FontAwesome6 name="grin-hearts" size={24} color="black" />,
     text: "I absolutely love my home!",
   },
-  
 ];
 
 const SixthScreen = ({ navigation }) => {
   const [currentIndex] = useState(3);
 
-
-
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.saveButtonWrapper}
-   
-    >
+    <TouchableOpacity style={styles.saveButtonWrapper}>
       <View style={styles.leftContent}>
         {item.icon}
         <Text style={styles.saveButtonText}>{item.text}</Text>
       </View>
-   
     </TouchableOpacity>
   );
 
@@ -78,7 +71,7 @@ const SixthScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
         <Text style={styles.text}>
-      How do you feel about the{"\n"}current state of your home?
+          How do you feel about the{"\n"}current state of your home?
         </Text>
       </View>
       <FlatList
@@ -89,14 +82,14 @@ const SixthScreen = ({ navigation }) => {
       />
 
       <View style={styles.bottomButtonWrapper}>
-       <TouchableOpacity
-              style={styles.buttonredesign}
-              onPress={() => navigation.navigate("Seventh")}
-            >
-              <View style={styles.buttonredesignContent}>
-                <Text style={styles.buttonredesigntext}>Continue</Text>
-              </View>
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonredesign}
+          onPress={() => navigation.navigate("Seventh")}
+        >
+          <View style={styles.buttonredesignContent}>
+            <Text style={styles.buttonredesigntext}>Continue</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

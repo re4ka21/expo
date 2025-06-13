@@ -17,6 +17,10 @@ import EighthScreen from "./components/poll/EighthScreen.js";
 import NinethScreen from "./components/poll/NinethScreen.js";
 import TenthScreen from "./components/poll/TenthScreen.js";
 import EleventhScreen from "./components/poll/EleventhScreen.js";
+import TwelfthScreen from "./components/poll/TwelfthScreen.js";
+import ThirteenthScreen from "./components/poll/ThirteenthScreen.js";
+import FourteenthScreen from "./components/poll/FourteenthScreen.js";
+import FiveteenthScreen from "./components/poll/FiveteenthScreen.js";
 enableScreens();
 
 const Stack = createNativeStackNavigator();
@@ -66,22 +70,22 @@ export default function App() {
             component={FivethScreen}
             options={{ headerShown: false }}
           />
-              <Stack.Screen
+          <Stack.Screen
             name="Sixth"
             component={SixthScreen}
             options={{ headerShown: false }}
           />
-               <Stack.Screen
+          <Stack.Screen
             name="Seventh"
             component={SeventhScreen}
             options={{ headerShown: false }}
           />
-            <Stack.Screen
+          <Stack.Screen
             name="Eighth"
             component={EighthScreen}
             options={{ headerShown: false }}
           />
-              <Stack.Screen
+          <Stack.Screen
             name="Nineth"
             component={NinethScreen}
             options={{ headerShown: false }}
@@ -91,9 +95,29 @@ export default function App() {
             component={TenthScreen}
             options={{ headerShown: false }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="Eleventh"
             component={EleventhScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Twelfth"
+            component={TwelfthScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Thirteenth"
+            component={ThirteenthScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Fourteenth"
+            component={FourteenthScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Fiveteenth"
+            component={FiveteenthScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

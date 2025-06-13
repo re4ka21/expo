@@ -47,22 +47,34 @@ const options = [
 
 const FourthSceen = ({ navigation }) => {
   const [currentIndex] = useState(1);
-  const [checked, setChecked] = useState(null);
+  const [checked, setChecked] = useState([]);
 
+  const toggleCheck = (id) => {
+    if (checked.includes(id)) {
+      setChecked(checked.filter((item) => item !== id));
+    } else {
+      setChecked([...checked, id]);
+    }
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.saveButtonWrapper}
-      onPress={() => setChecked(item.id)}
+      onPress={() => toggleCheck(item.id)}
     >
       <View style={styles.leftContent}>
         {item.icon}
         <Text style={styles.saveButtonText}>{item.text}</Text>
       </View>
       <View
-        style={[styles.checkbox, checked === item.id && styles.checkedCheckbox]}
+        style={[
+          styles.checkbox,
+          checked.includes(item.id) && styles.checkedCheckbox,
+        ]}
       >
-        {checked === item.id && <Entypo name="check" size={12} color="white" />}
+        {checked.includes(item.id) && (
+          <Entypo name="check" size={12} color="white" />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -98,21 +110,21 @@ const FourthSceen = ({ navigation }) => {
       />
 
       <View style={styles.bottomButtonWrapper}>
-    <TouchableOpacity
-  disabled={checked == null}
-  style={
-    checked == null
-      ? styles.buttonredesigninactive
-      : styles.buttonredesign
-  }
-  onPress={() => navigation.navigate("Fiveth")}
->
-  <View style={styles.buttonredesignContent}>
-    <Text style={styles.buttonredesigntext}>
-      {checked == null ? "Pick" : "Next"}
-    </Text>
-  </View>
-</TouchableOpacity>
+        <TouchableOpacity
+          disabled={checked.length === 0}
+          style={
+            checked.length === 0
+              ? styles.buttonredesigninactive
+              : styles.buttonredesign
+          }
+          onPress={() => navigation.navigate("Fiveth")}
+        >
+          <View style={styles.buttonredesignContent}>
+            <Text style={styles.buttonredesigntext}>
+              {checked.length === 0 ? "Pick one or more" : "Continue"}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

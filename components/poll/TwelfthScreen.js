@@ -11,36 +11,57 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 const options = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,
-    text: "Get inspired by design ideas",
+    text: "Interior design",
   },
   {
     id: 2,
     icon: <AntDesign name="cloud" size={24} color="black" />,
-    text: "Just curious to see how my\nspace could look",
+    text: "Exterior design",
   },
   {
     id: 3,
     icon: <Entypo name="home" size={24} color="black" />,
-    text: "Plan renovations",
+    text: "Upgrade furniture",
   },
   {
     id: 4,
     icon: <MaterialCommunityIcons name="sofa" size={24} color="black" />,
-    text: "Find and purchase products",
+    text: "Upgrade walls",
   },
   {
     id: 5,
+    icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
+    text: "Upgrade flooring",
+  },
+  {
+    id: 6,
+    icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
+    text: "Refresh colors",
+  },
+  {
+    id: 7,
+    icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
+    text: "Fill empty space",
+  },
+  {
+    id: 8,
+    icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
+    text: "Remove objects",
+  },
+  {
+    id: 9,
     icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
     text: "Other",
   },
 ];
 
-const ThirdScreen = ({ navigation }) => {
-  const [currentIndex] = useState(0);
+const TwelfthScreen = ({ navigation }) => {
+  const [currentIndex] = useState(8);
   const [checked, setChecked] = useState([]);
   const toggleCheck = (id) => {
     if (checked.includes(id)) {
@@ -70,6 +91,7 @@ const ThirdScreen = ({ navigation }) => {
       </View>
     </TouchableOpacity>
   );
+
   return (
     <View style={styles.container}>
       <View style={styles.dotsContainer}>
@@ -80,11 +102,19 @@ const ThirdScreen = ({ navigation }) => {
           />
         ))}
       </View>
-
-      <Text style={styles.text}>
-        What results are you looking{"\n"} for with Instant Remodel?
-      </Text>
-
+      <View style={styles.title}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesome
+            name="arrow-circle-left"
+            size={32}
+            color="#FC632B"
+            style={styles.arrow}
+          />
+        </TouchableOpacity>
+        <Text style={styles.text}>
+          What rooms would you like{"\n"} to redesign?
+        </Text>
+      </View>
       <FlatList
         data={options}
         keyExtractor={(item) => item.id.toString()}
@@ -100,7 +130,7 @@ const ThirdScreen = ({ navigation }) => {
               ? styles.buttonredesigninactive
               : styles.buttonredesign
           }
-          onPress={() => navigation.navigate("Fourth")}
+          onPress={() => navigation.navigate("Thirteenth")}
         >
           <View style={styles.buttonredesignContent}>
             <Text style={styles.buttonredesigntext}>
@@ -119,10 +149,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#FDFCFC",
   },
   text: {
-    fontSize: 32,
+    fontSize: 24,
     fontFamily: "InstrumentSerif",
-    marginTop: 60,
-    marginLeft: 15,
+    marginLeft: 12, // Відступ між іконкою та текстом
+    flexShrink: 1, // Дозволяє тексту не виходити за межі
   },
   dotsContainer: {
     flexDirection: "row",
@@ -143,7 +173,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FC632B",
     borderColor: "#FC632B",
   },
-
+  title: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 15,
+    marginTop: 60,
+  },
   saveButtonWrapper: {
     marginTop: 16,
     borderWidth: 1,
@@ -213,5 +248,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-export default ThirdScreen;
+export default TwelfthScreen;

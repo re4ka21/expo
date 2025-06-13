@@ -7,7 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 const options = [
   {
@@ -28,19 +28,14 @@ const options = [
 ];
 
 const NinethScreen = ({ navigation }) => {
-  const [currentIndex] = useState(6);
-
+  const [currentIndex] = useState(5);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.saveButtonWrapper}
-     
-    >
+    <TouchableOpacity style={styles.saveButtonWrapper}>
       <View style={styles.leftContent}>
         {item.icon}
         <Text style={styles.saveButtonText}>{item.text}</Text>
       </View>
-   
     </TouchableOpacity>
   );
 
@@ -64,7 +59,7 @@ const NinethScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
         <Text style={styles.text}>
-        Do you have any experience{"\n"}with redesigning your{"\n"}home?
+          Do you have any experience{"\n"}with redesigning your{"\n"}home?
         </Text>
       </View>
       <FlatList
@@ -75,14 +70,14 @@ const NinethScreen = ({ navigation }) => {
       />
 
       <View style={styles.bottomButtonWrapper}>
-         <TouchableOpacity
-           style={styles.buttonredesign}
-           onPress={() => navigation.navigate("Tenth")}
-         >
-           <View style={styles.buttonredesignContent}>
-             <Text style={styles.buttonredesigntext}>Continue</Text>
-           </View>
-         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonredesign}
+          onPress={() => navigation.navigate("Tenth")}
+        >
+          <View style={styles.buttonredesignContent}>
+            <Text style={styles.buttonredesigntext}>Continue</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -134,7 +129,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", 
+    justifyContent: "space-between",
     elevation: 1,
     width: "90%",
     marginRight: 16,
