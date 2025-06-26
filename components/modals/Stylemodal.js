@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   View,
@@ -10,13 +10,23 @@ import {
   ImageBackground,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedStyle } from "../../redux/ModalSelectionSlice";
 
 const StyleModal = ({ visible, onClose, data, onSelect }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  const selected = useSelector((state) => state.modalSelection.selectedStyle);
 
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleSelect = (name) => {
+    dispatch(setSelectedStyle(name));
+    if (onSelect) onSelect(name); // ОНОВЛЕННЯ локального стану
+    onClose();
+  };
 
   return (
     <Modal visible={visible} transparent animationType="slide">
@@ -29,12 +39,7 @@ const StyleModal = ({ visible, onClose, data, onSelect }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.searchWrapper}>
-            <AntDesign
-              name="search1"
-              size={24}
-              color="black"
-              style={styles.searchIcon}
-            />
+            <AntDesign name="search1" size={20} color="#333" />
             <TextInput
               placeholder="Style or association"
               value={searchQuery}
@@ -51,10 +56,7 @@ const StyleModal = ({ visible, onClose, data, onSelect }) => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.item}
-                onPress={() => {
-                  onSelect(item.name);
-                  onClose();
-                }}
+                onPress={() => handleSelect(item.name)}
               >
                 <ImageBackground
                   source={item.image}
@@ -62,21 +64,19 @@ const StyleModal = ({ visible, onClose, data, onSelect }) => {
                   imageStyle={styles.image}
                 >
                   <View style={styles.overlayText}>
-                    <Text
-                      style={styles.itemName}
-                      numberOfLines={1}
-                      ellipsizeMode="tail"
-                    >
-                      {item.name}
-                    </Text>
+                    <Text style={styles.itemName}>{item.name}</Text>
                     {item.description && (
-                      <Text
-                        style={styles.itemDesc}
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                      >
+                      <Text style={styles.itemDesc} numberOfLines={2}>
                         {item.description}
                       </Text>
+                    )}
+                    {item.name === selected && (
+                      <AntDesign
+                        name="checkcircle"
+                        size={20}
+                        color="#FC632B"
+                        style={styles.checkIcon}
+                      />
                     )}
                   </View>
                 </ImageBackground>
@@ -103,28 +103,41 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 30,
     width: "100%",
     maxHeight: "100%",
+    flex: 1,
   },
   modaltitle: {
     flexDirection: "row",
-    textAlign: "center",
     justifyContent: "space-between",
-    paddingVertical: 10,
     paddingHorizontal: 20,
+    paddingTop: 20,
+    alignItems: "center",
   },
   title: {
-    fontSize: 32,
-    textAlign: "center",
-    marginTop: 10,
+    fontSize: 22,
     fontFamily: "InstrumentSerif",
   },
   closeButton: {
-    marginTop: 10,
-    alignSelf: "center",
-    marginBottom: 10,
+    marginTop: 5,
   },
   cancel: {
     color: "#FC632B",
-    fontSize: 17,
+    fontSize: 16,
+  },
+  searchWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
+    borderRadius: 10,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    paddingVertical: 8,
+    marginLeft: 8,
+    color: "#000",
   },
   row: {
     flex: 1,
@@ -135,52 +148,31 @@ const styles = StyleSheet.create({
     paddingRight: 1.5,
     paddingVertical: 1,
   },
-
   imageBackground: {
     flex: 1,
     justifyContent: "flex-end",
   },
-
+  image: {
+    borderRadius: 10,
+  },
   overlayText: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 6,
-    width: "100%",
   },
-
   itemName: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "bold",
     color: "#fff",
-    width: "100%",
-    flexShrink: 1,
   },
-
   itemDesc: {
     fontSize: 12,
-    color: "#eee",
-    marginTop: 2,
-    width: "100%",
-    flexShrink: 1,
+    color: "#ddd",
   },
-  searchWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
-    borderRadius: 10,
-    marginHorizontal: 20,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-
-  searchIcon: {
-    marginRight: 8,
-  },
-
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: "#000",
-    paddingVertical: 8,
+  checkIcon: {
+    position: "absolute",
+    top: 6,
+    right: 6,
   },
 });
+
 export default StyleModal;

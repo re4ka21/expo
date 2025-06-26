@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -6,30 +6,17 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import Entypo from "@expo/vector-icons/Entypo";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-const options = [
-  {
-    id: 1,
-    icon: <AntDesign name="like1" size={24} color="black" />,
-    text: "Yes",
-  },
-  {
-    id: 2,
-    icon: <AntDesign name="dislike1" size={24} color="black" />,
-    text: "No",
-  },
-  {
-    id: 3,
-    icon: <Entypo name="emoji-flirt" size={24} color="black" />,
-    text: "I wanted to do it, but didn’t date",
-  },
-];
-
-const NinethScreen = ({ navigation }) => {
-  const [currentIndex] = useState(5);
-
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
+import ContinueButton from "../../components/ContinueButtons/ContinueButton";
+const QuestionScreen = ({
+  navigation,
+  currentIndex,
+  question,
+  options,
+  nextScreen,
+}) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.saveButtonWrapper}>
       <View style={styles.leftContent}>
@@ -41,14 +28,11 @@ const NinethScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.dotsContainer}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((dotIndex) => (
-          <View
-            key={dotIndex}
-            style={[styles.dot, currentIndex === dotIndex && styles.activeDot]}
-          />
-        ))}
-      </View>
+      <OnboardingDots
+        currentIndex={currentIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
+
       <View style={styles.title}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome
@@ -58,10 +42,9 @@ const NinethScreen = ({ navigation }) => {
             style={styles.arrow}
           />
         </TouchableOpacity>
-        <Text style={styles.text}>
-          Do you have any experience{"\n"}with redesigning your{"\n"}home?
-        </Text>
+        <Text style={styles.text}>{question}</Text>
       </View>
+
       <FlatList
         data={options}
         keyExtractor={(item) => item.id.toString()}
@@ -69,16 +52,7 @@ const NinethScreen = ({ navigation }) => {
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      <View style={styles.bottomButtonWrapper}>
-        <TouchableOpacity
-          style={styles.buttonredesign}
-          onPress={() => navigation.navigate("Tenth")}
-        >
-          <View style={styles.buttonredesignContent}>
-            <Text style={styles.buttonredesigntext}>Continue</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <ContinueButton onPress={() => navigation.navigate(nextScreen)} />
     </View>
   );
 };
@@ -91,27 +65,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontFamily: "InstrumentSerif",
-    marginLeft: 12, // Відступ між іконкою та текстом
-    flexShrink: 1, // Дозволяє тексту не виходити за межі
+    marginLeft: 12,
+    flexShrink: 1,
   },
   dotsContainer: {
     flexDirection: "row",
     justifyContent: "center",
     marginTop: 50,
-  },
-  checkbox: {
-    width: 24,
-    height: 24,
-    borderWidth: 2,
-    borderColor: "#444",
-    borderRadius: 4,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 70,
-  },
-  checkedCheckbox: {
-    backgroundColor: "#FC632B",
-    borderColor: "#FC632B",
   },
   title: {
     flexDirection: "row",
@@ -132,8 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     elevation: 1,
     width: "90%",
-    marginRight: 16,
-    marginLeft: 16,
+    marginHorizontal: 16,
   },
   leftContent: {
     flexDirection: "row",
@@ -154,18 +113,9 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: "#FC632B",
-    width: 6,
-    height: 6,
   },
   buttonredesign: {
     backgroundColor: "#FC632B",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesigninactive: {
-    backgroundColor: "#CCCBC6",
     paddingVertical: 15,
     paddingHorizontal: 60,
     borderRadius: 10,
@@ -189,4 +139,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NinethScreen;
+export default QuestionScreen;

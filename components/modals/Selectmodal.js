@@ -8,28 +8,22 @@ import {
   StyleSheet,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedRoom } from "../../redux/ModalSelectionSlice";
 
-const SelectModal = ({ selected, visible, onClose, data, onSelect, type }) => {
-  const getTitle = () => {
-    switch (type) {
-      case "room":
-        return "Select room";
-      case "AI":
-        return "AI intervation";
-      default:
-        return "Оберіть";
-    }
-  };
+const SelectModal = ({ visible, onClose, data, onSelect }) => {
+  const dispatch = useDispatch();
+  const selected = useSelector((state) => state.modalSelection.selectedRoom);
 
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={styles.overlay}>
         <View style={styles.container}>
-          <View style={styles.modaltitle}>
-            <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Select room</Text>
+            <TouchableOpacity onPress={onClose}>
               <AntDesign name="close" size={24} color="black" />
             </TouchableOpacity>
-            <Text style={styles.title}>{getTitle()}</Text>
           </View>
 
           <FlatList
@@ -39,22 +33,19 @@ const SelectModal = ({ selected, visible, onClose, data, onSelect, type }) => {
               <TouchableOpacity
                 style={styles.item}
                 onPress={() => {
-                  onSelect(item.name);
+                  if (onSelect) onSelect(item.name); // просто виклик колбеку
                   onClose();
                 }}
               >
-                <View style={styles.selected}>
-                  <Text style={styles.itemName}>{item.name}</Text>
+                <View style={styles.row}>
+                  <Text style={styles.itemText}>{item.name}</Text>
                   {item.name === selected && (
-                    <AntDesign
-                      name="checkcircle"
-                      size={24}
-                      color="#FC632B"
-                      style={styles.checkIcon}
-                    />
+                    <AntDesign name="checkcircle" size={20} color="#FC632B" />
                   )}
                 </View>
-                <Text style={styles.itemdescription}>{item.description}</Text>
+                {item.description && (
+                  <Text style={styles.description}>{item.description}</Text>
+                )}
               </TouchableOpacity>
             )}
           />
@@ -67,46 +58,43 @@ const SelectModal = ({ selected, visible, onClose, data, onSelect, type }) => {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "#00000099",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modaltitle: {
-    flexDirection: "row",
-    textAlign: "center",
-    borderBottomWidth: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: "#00000088",
+    justifyContent: "flex-end",
   },
   container: {
-    marginTop: 50,
-    backgroundColor: "white",
-    borderTopStartRadius: 30,
-    borderTopEndRadius: 30,
-    width: "100%",
-    maxHeight: "100%",
-    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: "80%",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: "#eee",
   },
   title: {
+    fontSize: 18,
     fontWeight: "bold",
-    marginLeft: 125,
-    marginTop: 15,
-    fontSize: 17,
   },
   item: {
-    paddingVertical: 10,
-    paddingHorizontal: 24,
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: "#eee",
   },
-  itemName: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  closeButton: {
-    marginVertical: 15,
-  },
-  selected: {
+  row: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  itemText: {
+    fontSize: 16,
+  },
+  description: {
+    fontSize: 12,
+    color: "#888",
+    marginTop: 4,
+  },
 });
+
 export default SelectModal;

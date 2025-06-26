@@ -8,36 +8,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
+import { testimonials } from "../../constants";
+import ContinueButton from "../../components/ContinueButtons/ContinueButton";
 const { width } = Dimensions.get("window");
 
-const testimonials = [
-  {
-    id: "1",
-    text: "Like Having a Pro at home",
-    maintext:
-      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
-    name: "Our user",
-  },
-  {
-    id: "2",
-    text: "Like Having a Pro at home",
-    maintext:
-      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
-    name: "Our user",
-  },
-  {
-    id: "3",
-    text: "Like Having a Pro at home",
-    maintext:
-      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
-    name: "Our user",
-  },
-];
-
+const currentDotsIndex = ONBOARDING_SCREENS.indexOf("EleventhScreen");
 const EleventhScreen = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentDotsIndex = 7; // Якщо це тимчасово — можна видалити
 
   const handleScroll = (event) => {
     const slideSize = event.nativeEvent.layoutMeasurement.width;
@@ -47,19 +26,10 @@ const EleventhScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* Верхній індикатор */}
-      <View style={styles.topDotsContainer}>
-        {[...Array(10)].map((_, i) => (
-          <View
-            key={i}
-            style={[
-              styles.dotSmall,
-              i === currentDotsIndex && styles.activeDot,
-            ]}
-          />
-        ))}
-      </View>
-
+      <OnboardingDots
+        currentIndex={currentDotsIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
       {/* Назва та стрілка */}
       <View style={styles.headerWrapper}>
         <TouchableOpacity
@@ -122,16 +92,7 @@ const EleventhScreen = ({ navigation }) => {
           ))}
         </View>
       </View>
-      <View style={styles.bottomButtonWrapper}>
-        <TouchableOpacity
-          style={styles.buttonredesign}
-          onPress={() => navigation.navigate("Twelfth")}
-        >
-          <View style={styles.buttonredesignContent}>
-            <Text style={styles.buttonredesigntext}>Continue</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <ContinueButton onPress={() => navigation.navigate("Twelfth")} />
     </View>
   );
 };

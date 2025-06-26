@@ -11,17 +11,20 @@ import * as ImagePicker from "expo-image-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import * as Font from "expo-font";
 import { useNavigation } from "@react-navigation/native";
-import StyleModal from "../modals/Stylemodal";
-import SelectModal from "../modals/Selectmodal";
+import StyleModal from "../components/modals/Stylemodal";
+import SelectModal from "../components/modals/Selectmodal";
 import { room, rooms, stylesList, styleImages } from "../constants";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  setSelectedStyle,
+  setSelectedRoom,
+  setSelectedAI,
+} from "../redux/ModalSelectionSlice";
 const Main = () => {
-  const [selected, setSelected] = useState(null);
-  const [selectedSecond, setSelectedSecond] = useState(null);
-  const [selectedThird, setSelectedThird] = useState(null);
-  const [selectedPhoto, setSelectedPhoto] = useState(false);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const dispatch = useDispatch();
+
   const [modalVisibleRoom, setModalVisibleRoom] = useState(false);
   const [modalVisibleAI, setModalVisibleAI] = useState(false);
   const [modalVisibleStyle, setModalVisibleStyle] = useState(false);
@@ -29,19 +32,6 @@ const Main = () => {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    async function loadFonts() {
-      await Font.loadAsync({
-        InstrumentSerif: require("../../assets/fonts/InstrumentSerif-Regular.ttf"),
-      });
-      setFontsLoaded(true);
-    }
-    loadFonts();
-  }, []);
-
-  const selectedStyleObj = stylesList.find(
-    (item) => item.name === selectedThird
-  );
   const openCamera = async () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
     if (!permissionResult.granted) {
@@ -76,6 +66,30 @@ const Main = () => {
       setSelectedPhotoUri(result.assets[0].uri);
     }
   };
+  const selectedRoom = useSelector(
+    (state) => state.modalSelection.selectedRoom
+  );
+  const selectedAI = useSelector((state) => state.modalSelection.selectedAI);
+  const selectedStyle = useSelector(
+    (state) => state.modalSelection.selectedStyle
+  );
+  const handleSelectStyle = (style) => {
+    dispatch(setSelectedStyle(style));
+    setModalVisibleStyle(false); // Закрити модалку, якщо потрібно
+  };
+
+  const handleSelectRoom = (room) => {
+    dispatch(setSelectedRoom(room));
+    setModalVisibleRoom(false);
+  };
+
+  const handleSelectAI = (ai) => {
+    dispatch(setSelectedAI(ai));
+    setModalVisibleAI(false);
+  };
+  const selectedStyleObj = stylesList.find(
+    (item) => item.name === selectedStyle
+  );
 
   return (
     <View style={styles.container}>
@@ -95,16 +109,16 @@ const Main = () => {
         />
       ) : (
         <ImageBackground
-          source={require("../../assets/images/background.png")}
+          source={require("../assets/images/background.png")}
           style={styles.selectphoto}
         >
           <Image
-            source={require("../../assets/images/intertwo.png")}
+            source={require("../assets/images/intertwo.png")}
             style={styles.phototwo}
             resizeMode="contain"
           />
           <Image
-            source={require("../../assets/images/interone.png")}
+            source={require("../assets/images/interone.png")}
             style={styles.photoone}
             resizeMode="contain"
           />
@@ -157,17 +171,15 @@ const Main = () => {
                 <AntDesign name="down" size={20} color="black" />
               </View>
               <Text style={styles.selectorText}>
-                {selected || "Select Room"}
+                {selectedRoom || "Select Room"}
               </Text>
             </TouchableOpacity>
-
             <SelectModal
               visible={modalVisibleRoom}
               onClose={() => setModalVisibleRoom(false)}
               data={room}
-              type="room"
-              onSelect={(name) => setSelected(name)} // зберігає вибір
-              selected={selected}
+              onSelect={handleSelectRoom}
+              selected={selectedRoom}
             />
           </View>
         </TouchableOpacity>
@@ -180,7 +192,7 @@ const Main = () => {
               onPress={() => setModalVisibleAI(true)}
             >
               <Text style={styles.selectorText}>
-                {selectedSecond || "Select Level"}
+                {selectedAI || "Select Level"}
               </Text>
             </TouchableOpacity>
             <View
@@ -194,29 +206,27 @@ const Main = () => {
             >
               <AntDesign name="down" size={20} color="black" />
             </View>
-
             <SelectModal
               visible={modalVisibleAI}
               onClose={() => setModalVisibleAI(false)}
               data={rooms}
-              onSelect={setSelectedSecond}
-              type="AI"
-              selected={selectedSecond}
+              onSelect={handleSelectAI}
+              selected={selectedAI}
             />
           </View>
         </TouchableOpacity>
         {/* Style */}
         <View style={styles.pickerWrapperphoto}>
           <TouchableOpacity onPress={() => setModalVisibleStyle(true)}>
-            {(selectedThird && styleImages[selectedThird] && (
+            {(selectedStyle && styleImages[selectedStyle] && (
               <Image
-                source={styleImages[selectedThird]}
+                source={styleImages[selectedStyle]}
                 style={styles.modalphoto}
                 resizeMode="contain"
               />
             )) || (
               <Image
-                source={require("../../assets/images/Artdeco.png")}
+                source={require("../assets/images/Artdeco.png")}
                 style={styles.modalphoto}
                 resizeMode="contain"
               />
@@ -226,7 +236,7 @@ const Main = () => {
               onPress={() => setModalVisibleStyle(true)}
             >
               <Text style={styles.selectorText}>
-                {selectedThird || "Artdeco"}
+                {selectedStyle || "Select Style"}
               </Text>
             </TouchableOpacity>
             <View
@@ -244,7 +254,7 @@ const Main = () => {
               visible={modalVisibleStyle}
               onClose={() => setModalVisibleStyle(false)}
               data={stylesList}
-              onSelect={(style) => setSelectedThird(style)}
+              onSelect={handleSelectStyle}
             />
             {selectedStyleObj && selectedStyleObj.description ? (
               <Text style={styles.styleDescription}>

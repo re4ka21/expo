@@ -9,8 +9,10 @@ import {
   ImageBackground,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { stylesList } from "../constants";
+import { stylesList } from "../../constants";
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
+const currentIndex = ONBOARDING_SCREENS.indexOf("ThirteenthScreen");
 const ThirteenthScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -19,18 +21,17 @@ const ThirteenthScreen = ({ navigation }) => {
   );
 
   const handleStyleSelect = (style) => {
-    // Можна зберегти вибір у стейт, якщо потрібно
     navigation.navigate("Fourteenth");
   };
 
   return (
     <View style={styles.container}>
       {/* Dots */}
-      <View style={styles.dotsContainer}>
-        {[...Array(10)].map((_, i) => (
-          <View key={i} style={[styles.dot, i === 9 && styles.activeDot]} />
-        ))}
-      </View>
+
+      <OnboardingDots
+        currentIndex={currentIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
 
       {/* Title & Back */}
       <View style={styles.title}>

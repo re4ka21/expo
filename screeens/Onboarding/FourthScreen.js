@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,42 +6,17 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import CheckContinueButton from "../../components/ContinueButtons/CheckContinueButton";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
+import { FourthOptions } from "../../constants";
 
-const options = [
-  {
-    id: 1,
-    icon: <AntDesign name="star" size={24} color="black" />,
-    text: "Get inspired by design ideas",
-  },
-  {
-    id: 2,
-    icon: <AntDesign name="cloud" size={24} color="black" />,
-    text: "Just curious to see how my\nspace could look",
-  },
-  {
-    id: 3,
-    icon: <Entypo name="home" size={24} color="black" />,
-    text: "Plan renovations",
-  },
-  {
-    id: 4,
-    icon: <MaterialCommunityIcons name="sofa" size={24} color="black" />,
-    text: "Find and purchase products",
-  },
-  {
-    id: 5,
-    icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
-    text: "Other",
-  },
-];
-
-const ThirdScreen = ({ navigation }) => {
-  const [currentIndex] = useState(0);
+const currentIndex = ONBOARDING_SCREENS.indexOf("FourthScreen");
+const FourthSceen = ({ navigation }) => {
   const [checked, setChecked] = useState([]);
+
   const toggleCheck = (id) => {
     if (checked.includes(id)) {
       setChecked(checked.filter((item) => item !== id));
@@ -49,6 +24,7 @@ const ThirdScreen = ({ navigation }) => {
       setChecked([...checked, id]);
     }
   };
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.saveButtonWrapper}
@@ -70,45 +46,37 @@ const ThirdScreen = ({ navigation }) => {
       </View>
     </TouchableOpacity>
   );
+
   return (
     <View style={styles.container}>
-      <View style={styles.dotsContainer}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((dotIndex) => (
-          <View
-            key={dotIndex}
-            style={[styles.dot, currentIndex === dotIndex && styles.activeDot]}
+      <OnboardingDots
+        currentIndex={currentIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
+      <View style={styles.title}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesome
+            name="arrow-circle-left"
+            size={32}
+            color="#FC632B"
+            style={styles.arrow}
           />
-        ))}
+        </TouchableOpacity>
+        <Text style={styles.text}>
+          What rooms would you like{"\n"} to redesign?
+        </Text>
       </View>
-
-      <Text style={styles.text}>
-        What results are you looking{"\n"} for with Instant Remodel?
-      </Text>
-
       <FlatList
-        data={options}
+        data={FourthOptions}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      <View style={styles.bottomButtonWrapper}>
-        <TouchableOpacity
-          disabled={checked.length === 0}
-          style={
-            checked.length === 0
-              ? styles.buttonredesigninactive
-              : styles.buttonredesign
-          }
-          onPress={() => navigation.navigate("Fourth")}
-        >
-          <View style={styles.buttonredesignContent}>
-            <Text style={styles.buttonredesigntext}>
-              {checked.length === 0 ? "Pick one or more" : "Continue"}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <CheckContinueButton
+        onPress={() => navigation.navigate("Fiveth")}
+        disabled={checked.length === 0}
+      />
     </View>
   );
 };
@@ -119,16 +87,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FDFCFC",
   },
   text: {
-    fontSize: 32,
+    fontSize: 24,
     fontFamily: "InstrumentSerif",
-    marginTop: 60,
-    marginLeft: 15,
+    marginLeft: 12, // Відступ між іконкою та текстом
+    flexShrink: 1, // Дозволяє тексту не виходити за межі
   },
-  dotsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 50,
-  },
+
   checkbox: {
     width: 24,
     height: 24,
@@ -143,7 +107,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FC632B",
     borderColor: "#FC632B",
   },
-
+  title: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 15,
+    marginTop: 60,
+  },
   saveButtonWrapper: {
     marginTop: 16,
     borderWidth: 1,
@@ -170,18 +139,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
   },
-  dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 5,
-    backgroundColor: "#ccc",
-    marginHorizontal: 10,
-  },
-  activeDot: {
-    backgroundColor: "#FC632B",
-    width: 6,
-    height: 6,
-  },
+
   buttonredesign: {
     backgroundColor: "#FC632B",
     paddingVertical: 15,
@@ -214,4 +172,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ThirdScreen;
+export default FourthSceen;

@@ -1,8 +1,8 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Main from "./screens/Main.js";
-import History from "./screens/History.js";
-import Measure from "./screens/Measure.js";
+import Main from "../Main.js";
+import History from "../History.js";
+import Measure from "../Measure.js";
 import { Text, View } from "react-native";
 import { enableScreens } from "react-native-screens";
 import Fontisto from "@expo/vector-icons/Fontisto";

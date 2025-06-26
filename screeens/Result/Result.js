@@ -10,15 +10,15 @@ import {
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { ImageContext } from "../context/ImageContext";
+import { ImageContext } from "../../context/ImageContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import StyleModal from "../modals/Stylemodal";
-import SelectModal from "../modals/Selectmodal";
+import StyleModal from "../../components/modals/Stylemodal";
+import SelectModal from "../../components/modals/Selectmodal";
 import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 import { Asset } from "expo-asset";
-import { room, rooms, stylesList, styleImages } from "../constants";
+import { room, rooms, stylesList, styleImages } from "../../constants";
 const ResultScreen = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);

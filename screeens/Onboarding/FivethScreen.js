@@ -10,32 +10,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
+import { carouselData } from "../../constants";
+import Carousel from "../../components/Carousel";
+import ContineButtonCarousel from "../../components/ContinueButtons/ContineButtonCarousel";
 const { width } = Dimensions.get("window");
 
-const carouselData = [
-  { id: "1", image: require("../../assets/images/Artdeco.png") },
-  { id: "2", image: require("../../assets/images/Bauhaus.png") },
-  { id: "3", image: require("../../assets/images/Japanese.png") },
-  { id: "4", image: require("../../assets/images/Tropical.png") },
-  { id: "5", image: require("../../assets/images/Scandinavian.png") },
-];
-
+const currentIndex = ONBOARDING_SCREENS.indexOf("FivethScreen");
 const FivethScreen = ({ navigation }) => {
-  const [currentIndex] = useState(2);
-
-
   const scrollX = useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.container}>
-      <View style={styles.dotsContainer}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((dotIndex) => (
-          <View
-            key={dotIndex}
-            style={[styles.dot, currentIndex === dotIndex && styles.activeDot]}
-          />
-        ))}
-      </View>
+      <OnboardingDots
+        currentIndex={currentIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
 
       <View style={styles.title}>
         <TouchableOpacity
@@ -55,46 +45,7 @@ const FivethScreen = ({ navigation }) => {
       </View>
 
       {/* 🖼️ Карусель */}
-      <Animated.FlatList
-        data={carouselData}
-        renderItem={({ item, index }) => {
-          const inputRange = [
-            (index - 1) * (width * 0.75 + 20),
-            index * (width * 0.75 + 20),
-            (index + 1) * (width * 0.75 + 20),
-          ];
-
-          const scale = scrollX.interpolate({
-            inputRange,
-            outputRange: [0.85, 1, 0.85],
-            extrapolate: "clamp",
-          });
-
-          return (
-            <Animated.View
-              style={[styles.carouselItem, { transform: [{ scale }] }]}
-            >
-              <Image source={item.image} style={styles.carouselImage} />
-            </Animated.View>
-          );
-        }}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        snapToInterval={width * 0.75 + 20}
-        decelerationRate="fast"
-        snapToAlignment="start"
-        pagingEnabled={false}
-        style={styles.carousel}
-        contentContainerStyle={{
-          paddingHorizontal: (width - width * 0.75) / 2,
-        }}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: true }
-        )}
-        scrollEventThrottle={16}
-      />
+      <Carousel data={carouselData} scrollX={scrollX} />
       <View style={styles.numbercontainer}>
         <Text style={styles.number}>806,345</Text>
         <Text style={styles.texttwo}>
@@ -102,16 +53,7 @@ const FivethScreen = ({ navigation }) => {
           next
         </Text>
       </View>
-      <View style={styles.bottomButtonWrapper}>
-        <TouchableOpacity
-          style={styles.buttonredesign}
-          onPress={() => navigation.navigate("Sixth")}
-        >
-          <View style={styles.buttonredesignContent}>
-            <Text style={styles.buttonredesigntext}>Continue</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <ContineButtonCarousel onPress={() => navigation.navigate("Sixth")} />
     </View>
   );
 };
@@ -134,15 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "92%",
   },
-  buttonredesignContent: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonredesigntext: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
+
   arrowContainer: {
     marginLeft: 15,
     zIndex: 2,

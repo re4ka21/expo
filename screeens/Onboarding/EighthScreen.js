@@ -2,20 +2,18 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
+import ContinueButton from "../../components/ContinueButtons/ContinueButton";
 const EighthScreen = ({ navigation }) => {
-  const [currentIndex] = useState(4);
+  const currentIndex = ONBOARDING_SCREENS.indexOf("EighthScreen");
 
   return (
     <View style={styles.container}>
-      <View style={styles.dotsContainer}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((dotIndex) => (
-          <View
-            key={dotIndex}
-            style={[styles.dot, currentIndex === dotIndex && styles.activeDot]}
-          />
-        ))}
-      </View>
+      <OnboardingDots
+        currentIndex={currentIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
       <View style={styles.title}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome
@@ -42,16 +40,7 @@ const EighthScreen = ({ navigation }) => {
           resizeMode="cover"
         />
       </View>
-      <View style={styles.bottomButtonWrapper}>
-        <TouchableOpacity
-          style={styles.buttonredesign}
-          onPress={() => navigation.navigate("Nineth")}
-        >
-          <View style={styles.buttonredesignContent}>
-            <Text style={styles.buttonredesigntext}>Continue</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <ContinueButton onPress={() => navigation.navigate("Nineth")} />
     </View>
   );
 };
@@ -110,32 +99,12 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 60,
   },
-  saveButtonWrapper: {
-    marginTop: 16,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 20,
-    backgroundColor: "white",
-    paddingVertical: 25,
-    paddingHorizontal: 30,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between", // важливо
-    elevation: 1,
-    width: "90%",
-    marginRight: 16,
-    marginLeft: 16,
-  },
+
   leftContent: {
     flexDirection: "row",
     alignItems: "center",
   },
-  saveButtonText: {
-    fontSize: 16,
-    marginLeft: 8,
-    color: "#000",
-    fontWeight: "bold",
-  },
+
   dot: {
     width: 6,
     height: 6,
@@ -147,36 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FC632B",
     width: 6,
     height: 6,
-  },
-  buttonredesign: {
-    backgroundColor: "#FC632B",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesigninactive: {
-    backgroundColor: "#CCCBC6",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesignContent: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonredesigntext: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  bottomButtonWrapper: {
-    position: "absolute",
-    bottom: 70,
-    left: 0,
-    right: 0,
-    alignItems: "center",
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,48 +7,14 @@ import {
   FlatList,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { ONBOARDING_SCREENS } from "../../constants";
+import OnboardingDots from "../../components/Dots";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-const options = [
-  {
-    id: 1,
-    icon: <MaterialCommunityIcons name="sofa" size={24} color="black" />,
-    text: "Living room",
-  },
-  {
-    id: 2,
-    icon: <MaterialCommunityIcons name="chef-hat" size={24} color="black" />,
-    text: "kitchen",
-  },
-  {
-    id: 3,
-    icon: <MaterialIcons name="dining" size={24} color="black" />,
-    text: "Dining room",
-  },
-  {
-    id: 4,
-    icon: <FontAwesome5 name="bath" size={24} color="black" />,
-    text: "Bathroom",
-  },
-  {
-    id: 5,
-    icon: <FontAwesome name="bed" size={24} color="black" />,
-    text: "Bedromm",
-  },
-  {
-    id: 6,
-    icon: <FontAwesome6 name="face-flushed" size={24} color="black" />,
-    text: "other",
-  },
-];
-
-const FourthSceen = ({ navigation }) => {
-  const [currentIndex] = useState(1);
+import { TwelfthOptions } from "../../constants";
+import CheckContinueButton from "../../components/ContinueButtons/CheckContinueButton";
+const currentIndex = ONBOARDING_SCREENS.indexOf("TwelfthScreen");
+const TwelfthScreen = ({ navigation }) => {
   const [checked, setChecked] = useState([]);
-
   const toggleCheck = (id) => {
     if (checked.includes(id)) {
       setChecked(checked.filter((item) => item !== id));
@@ -56,7 +22,6 @@ const FourthSceen = ({ navigation }) => {
       setChecked([...checked, id]);
     }
   };
-
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.saveButtonWrapper}
@@ -81,14 +46,10 @@ const FourthSceen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.dotsContainer}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((dotIndex) => (
-          <View
-            key={dotIndex}
-            style={[styles.dot, currentIndex === dotIndex && styles.activeDot]}
-          />
-        ))}
-      </View>
+      <OnboardingDots
+        currentIndex={currentIndex}
+        total={ONBOARDING_SCREENS.length}
+      />
       <View style={styles.title}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome
@@ -103,29 +64,16 @@ const FourthSceen = ({ navigation }) => {
         </Text>
       </View>
       <FlatList
-        data={options}
+        data={TwelfthOptions}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      <View style={styles.bottomButtonWrapper}>
-        <TouchableOpacity
-          disabled={checked.length === 0}
-          style={
-            checked.length === 0
-              ? styles.buttonredesigninactive
-              : styles.buttonredesign
-          }
-          onPress={() => navigation.navigate("Fiveth")}
-        >
-          <View style={styles.buttonredesignContent}>
-            <Text style={styles.buttonredesigntext}>
-              {checked.length === 0 ? "Pick one or more" : "Continue"}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <CheckContinueButton
+        onPress={() => navigation.navigate("Thirteenth")}
+        disabled={checked.length === 0}
+      />
     </View>
   );
 };
@@ -192,48 +140,5 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
   },
-  dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 5,
-    backgroundColor: "#ccc",
-    marginHorizontal: 10,
-  },
-  activeDot: {
-    backgroundColor: "#FC632B",
-    width: 6,
-    height: 6,
-  },
-  buttonredesign: {
-    backgroundColor: "#FC632B",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesigninactive: {
-    backgroundColor: "#CCCBC6",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesignContent: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonredesigntext: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  bottomButtonWrapper: {
-    position: "absolute",
-    bottom: 70,
-    left: 0,
-    right: 0,
-    alignItems: "center",
-  },
 });
-
-export default FourthSceen;
+export default TwelfthScreen;
