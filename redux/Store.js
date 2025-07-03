@@ -11,18 +11,18 @@ import {
   REGISTER,
 } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import selectedImagesReducer from "./SelectedImagesSlice";
 import modalSelectionReducer from "./ModalSelectionSlice";
 
 const rootReducer = combineReducers({
   modalSelection: modalSelectionReducer,
-  // інші редюсери, якщо є
+  selectedImages: selectedImagesReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["modalSelection"], // зберігаємо лише цей slice
+  whitelist: ["modalSelection", "selectedImages"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

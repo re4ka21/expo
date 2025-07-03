@@ -7,11 +7,17 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { ImageContext } from "../context/ImageContext";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  clearSelectedImages,
+  selectSelectedImages,
+  selectStyleImages,
+} from "../redux/SelectedImagesSlice";
 
 const App = () => {
-  const { selectedImages, styleImages, clearSelectedImages } =
-    useContext(ImageContext);
+  const dispatch = useDispatch();
+  const selectedImages = useSelector(selectSelectedImages);
+  const styleImages = useSelector(selectStyleImages);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -27,7 +33,10 @@ const App = () => {
         ))}
       </View>
 
-      <TouchableOpacity onPress={clearSelectedImages} style={styles.button}>
+      <TouchableOpacity
+        onPress={() => dispatch(clearSelectedImages())}
+        style={styles.button}
+      >
         <Text style={styles.buttonText}>clear</Text>
       </TouchableOpacity>
     </ScrollView>

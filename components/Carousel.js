@@ -48,9 +48,6 @@ const Carousel = ({ data, scrollX }) => {
 };
 
 const styles = StyleSheet.create({
-  carousel: {
-    marginTop: 70,
-  },
   carouselItem: {
     width: width * 0.75,
     marginHorizontal: 10,

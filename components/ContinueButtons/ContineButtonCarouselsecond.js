@@ -22,7 +22,7 @@ const ContineButtonCarousel = ({ onPress, disabled, label = "Continue" }) => {
 const styles = StyleSheet.create({
   wrapper: {
     position: "absolute",
-    bottom: -120, // 🔺 Піднімає кнопку над навбаром
+    bottom: -200, // 🔺 Піднімає кнопку над навбаром
     left: 0,
     right: 0,
     alignItems: "center",

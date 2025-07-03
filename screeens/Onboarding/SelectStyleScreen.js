@@ -14,14 +14,14 @@ import { ONBOARDING_SCREENS } from "../../constants";
 import OnboardingDots from "../../components/Dots";
 const currentIndex = ONBOARDING_SCREENS.indexOf("ThirteenthScreen");
 const ThirteenthScreen = ({ navigation }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
 
   const filteredData = stylesList.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleStyleSelect = (style) => {
-    navigation.navigate("Fourteenth");
+    navigation.navigate("Carousel", { screenType: "FourteenthScreen" });
   };
 
   return (
@@ -36,12 +36,7 @@ const ThirteenthScreen = ({ navigation }) => {
       {/* Title & Back */}
       <View style={styles.title}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesome
-            name="arrow-circle-left"
-            size={32}
-            color="#FC632B"
-            style={styles.arrow}
-          />
+          <FontAwesome name="arrow-circle-left" size={32} color="#FC632B" />
         </TouchableOpacity>
         <Text style={styles.text}>
           Which style reflects your{"\n"}personality the most?

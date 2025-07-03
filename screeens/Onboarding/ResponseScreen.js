@@ -92,7 +92,11 @@ const EleventhScreen = ({ navigation }) => {
           ))}
         </View>
       </View>
-      <ContinueButton onPress={() => navigation.navigate("Twelfth")} />
+      <ContinueButton
+        onPress={() =>
+          navigation.navigate("CheckCombined", { screenType: "TwelfthScreen" })
+        }
+      />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,14 +7,55 @@ import {
   FlatList,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import CheckContinueButton from "../../components/ContinueButtons/CheckContinueButton";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS } from "../../constants";
+import CheckContinueButton from "../../components/ContinueButtons/CheckContinueButton";
 import OnboardingDots from "../../components/Dots";
-import { FourthOptions } from "../../constants";
 
-const currentIndex = ONBOARDING_SCREENS.indexOf("FourthScreen");
-const FourthSceen = ({ navigation }) => {
+import {
+  ONBOARDING_SCREENS,
+  ThirdOptions,
+  FourthOptions,
+  TwelfthOptions,
+} from "../../constants";
+
+const dataMap = {
+  ThirdScreen: {
+    options: ThirdOptions,
+    question: "What results are you looking\nfor with Instant Remodel?",
+    nextScreen: "FourthScreen",
+    showBack: false,
+  },
+  FourthScreen: {
+    options: FourthOptions,
+    question: "What rooms would you like\nto redesign?",
+    nextScreen: (navigation) =>
+      navigation.navigate("Carousel", { screenType: "FivethScreen" }),
+    showBack: true,
+  },
+  TwelfthScreen: {
+    options: TwelfthOptions,
+    question: "What rooms would you like\nto redesign?",
+    nextScreen: "Thirteenth",
+    showBack: true,
+  },
+};
+
+const CheckCombinedScreen = ({ navigation, route }) => {
+  // Отримуємо тип екрану з параметрів (припускаємо, що передається у route.params.screenType)
+  const screenType = route?.params?.screenType || "ThirdScreen";
+
+  const { options, question, nextScreen, showBack } = dataMap[screenType];
+  const handleContinue = () => {
+    if (typeof nextScreen === "function") {
+      nextScreen(navigation);
+    } else if (dataMap[nextScreen]) {
+      navigation.push("CheckCombined", { screenType: nextScreen });
+    } else {
+      navigation.navigate(nextScreen);
+    }
+  };
+  const currentIndex = ONBOARDING_SCREENS.indexOf(screenType);
+
   const [checked, setChecked] = useState([]);
 
   const toggleCheck = (id) => {
@@ -53,28 +94,32 @@ const FourthSceen = ({ navigation }) => {
         currentIndex={currentIndex}
         total={ONBOARDING_SCREENS.length}
       />
-      <View style={styles.title}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <FontAwesome
-            name="arrow-circle-left"
-            size={32}
-            color="#FC632B"
-            style={styles.arrow}
-          />
-        </TouchableOpacity>
-        <Text style={styles.text}>
-          What rooms would you like{"\n"} to redesign?
-        </Text>
-      </View>
+
+      {showBack && (
+        <View style={styles.title}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <FontAwesome
+              name="arrow-circle-left"
+              size={32}
+              color="#FC632B"
+              style={styles.arrow}
+            />
+          </TouchableOpacity>
+          <Text style={styles.text}>{question}</Text>
+        </View>
+      )}
+
+      {!showBack && <Text style={styles.text}>{question}</Text>}
+
       <FlatList
-        data={FourthOptions}
+        data={options}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
       <CheckContinueButton
-        onPress={() => navigation.navigate("Fiveth")}
+        onPress={handleContinue}
         disabled={checked.length === 0}
       />
     </View>
@@ -87,12 +132,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FDFCFC",
   },
   text: {
-    fontSize: 24,
+    fontSize: 32,
     fontFamily: "InstrumentSerif",
-    marginLeft: 12, // Відступ між іконкою та текстом
-    flexShrink: 1, // Дозволяє тексту не виходити за межі
+    marginLeft: 15,
+    flexShrink: 1,
   },
-
   checkbox: {
     width: 24,
     height: 24,
@@ -107,12 +151,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FC632B",
     borderColor: "#FC632B",
   },
-  title: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 15,
-    marginTop: 60,
-  },
   saveButtonWrapper: {
     marginTop: 16,
     borderWidth: 1,
@@ -123,7 +161,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // важливо
+    justifyContent: "space-between",
     elevation: 1,
     width: "90%",
     marginRight: 16,
@@ -139,37 +177,15 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
   },
-
-  buttonredesign: {
-    backgroundColor: "#FC632B",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesigninactive: {
-    backgroundColor: "#CCCBC6",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 10,
-    width: "92%",
-  },
-  buttonredesignContent: {
+  title: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    marginLeft: 15,
+    marginTop: 60,
   },
-  buttonredesigntext: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  bottomButtonWrapper: {
-    position: "absolute",
-    bottom: 70,
-    left: 0,
-    right: 0,
-    alignItems: "center",
+  arrow: {
+    marginRight: 10,
   },
 });
 
-export default FourthSceen;
+export default CheckCombinedScreen;

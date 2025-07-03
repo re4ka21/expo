@@ -26,7 +26,9 @@ const SecondScreen = ({ navigation }) => {
       <View style={styles.bottomButtonWrapper}>
         <TouchableOpacity
           style={styles.buttonredesign}
-          onPress={() => navigation.navigate("Third")}
+          onPress={() =>
+            navigation.navigate("CheckCombined", { screenType: "ThirdScreen" })
+          }
         >
           <View style={styles.buttonredesignContent}>
             <Text style={styles.buttonredesigntext}>Redesign interior</Text>

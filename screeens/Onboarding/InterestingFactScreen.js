@@ -40,7 +40,11 @@ const EighthScreen = ({ navigation }) => {
           resizeMode="cover"
         />
       </View>
-      <ContinueButton onPress={() => navigation.navigate("Nineth")} />
+      <ContinueButton
+        onPress={() =>
+          navigation.navigate("Combined", { screenType: "NinethScreen" })
+        }
+      />
     </View>
   );
 };
