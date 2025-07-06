@@ -1,15 +1,22 @@
-// LoadingScreen.js
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { useDispatch } from "react-redux";
+import { setOnboardingDone } from "../../redux/userSlice";
 
 const FiveteenthScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    // Виставляємо прапорець завершення онбордингу
+    dispatch(setOnboardingDone(true));
+
+    // Через 2 секунди переходимо до головного екрану
     const timer = setTimeout(() => {
-      navigation.navigate("Profile");
+      navigation.replace("Main");
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [dispatch, navigation]);
 
   return (
     <View style={styles.container}>
@@ -35,7 +42,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontFamily: "InstrumentSerif",
     marginTop: 384,
-
     textAlign: "center",
   },
   secondtext: {

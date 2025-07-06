@@ -75,7 +75,7 @@ const Main = () => {
   );
   const handleSelectStyle = (style) => {
     dispatch(setSelectedStyle(style));
-    setModalVisibleStyle(false); // Закрити модалку, якщо потрібно
+    setModalVisibleStyle(false);
   };
 
   const handleSelectRoom = (room) => {

@@ -11,20 +11,19 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { ONBOARDING_SCREENS, carouselData } from "../../constants";
 import OnboardingDots from "../../components/Dots";
 import Carousel from "../../components/Carousel";
-import ContineButtonCarousel from "../../components/ContinueButtons/ContineButtonCarouselfirst";
+import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 const { width } = Dimensions.get("window");
-
 const dataMap = {
-  FivethScreen: {
+  LivingRoomStatsScreen: {
     title: "Great choice",
     number: "806,345",
     description:
       "Living rooms have been redesigned by\nour users. Yours could be next",
     nextScreen: (navigation) =>
-      navigation.navigate("Combined", { screenType: "SixthScreen" }),
+      navigation.navigate("Combined", { screenType: "CurrentHomeFeelScreen" }),
     backgroundColor: "#FEF3EB",
   },
-  FourteenthScreen: {
+  StyleRecommendationScreen: {
     title: null,
     number: "You’ve got a taste!",
     description:
@@ -35,7 +34,7 @@ const dataMap = {
 };
 
 const CombinedCarouselScreen = ({ navigation, route }) => {
-  const screenType = route?.params?.screenType || "FivethScreen";
+  const screenType = route?.params?.screenType || "LivingRoomStatsScreen";
   const { title, number, description, nextScreen, backgroundColor } =
     dataMap[screenType];
   const currentIndex = ONBOARDING_SCREENS.indexOf(screenType);
@@ -68,7 +67,7 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
             style={styles.arrow}
           />
         </TouchableOpacity>
-        {screenType === "FivethScreen" ? (
+        {screenType === "LivingRoomStatsScreen" ? (
           <View style={styles.centeredTitle}>
             <Text style={styles.titleText}>{title}</Text>
           </View>
@@ -76,7 +75,6 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
           <Text style={styles.titleText}>{title}</Text>
         )}
       </View>
-
       <Carousel data={carouselData} scrollX={scrollX} style={styles.carousel} />
 
       <View style={styles.textContainer}>
@@ -84,7 +82,7 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
           <Text
             style={[
               styles.numberText,
-              screenType === "FourteenthScreen" && { fontSize: 40 },
+              screenType === "StyleRecommendationScreen" && { fontSize: 40 },
             ]}
           >
             {number}
@@ -95,7 +93,7 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
         </Text>
       </View>
 
-      <ContineButtonCarousel onPress={handleContinue} />
+      <UniversalButton onPress={handleContinue} />
     </View>
   );
 };

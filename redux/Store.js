@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
+import userReducer from "./userSlice";
 import {
   persistStore,
   persistReducer,
@@ -17,12 +18,13 @@ import modalSelectionReducer from "./ModalSelectionSlice";
 const rootReducer = combineReducers({
   modalSelection: modalSelectionReducer,
   selectedImages: selectedImagesReducer,
+  user: userReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["modalSelection", "selectedImages"],
+  whitelist: ["modalSelection", "selectedImages", "user"], // 👈 додай user
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

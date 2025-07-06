@@ -4,7 +4,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { ONBOARDING_SCREENS } from "../../constants";
 import OnboardingDots from "../../components/Dots";
-import ContinueButton from "../../components/ContinueButtons/ContinueButton";
+import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 const EighthScreen = ({ navigation }) => {
   const currentIndex = ONBOARDING_SCREENS.indexOf("EighthScreen");
 
@@ -40,9 +40,11 @@ const EighthScreen = ({ navigation }) => {
           resizeMode="cover"
         />
       </View>
-      <ContinueButton
+      <UniversalButton
         onPress={() =>
-          navigation.navigate("Combined", { screenType: "NinethScreen" })
+          navigation.navigate("Combined", {
+            screenType: "RedesignExperienceScreen",
+          })
         }
       />
     </View>
@@ -68,8 +70,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     fontFamily: "InstrumentSerif",
-    marginLeft: 52, // Відступ між іконкою та текстом
-    flexShrink: 1, // Дозволяє тексту не виходити за межі
+    marginLeft: 52,
+    flexShrink: 1,
     marginTop: 35,
   },
   photo: {

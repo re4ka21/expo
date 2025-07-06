@@ -1,4 +1,3 @@
-// LoadingScreen.js
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
@@ -27,7 +26,9 @@ const SecondScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.buttonredesign}
           onPress={() =>
-            navigation.navigate("CheckCombined", { screenType: "ThirdScreen" })
+            navigation.navigate("CheckCombined", {
+              screenType: "DesiredResultsScreen",
+            })
           }
         >
           <View style={styles.buttonredesignContent}>
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   link: {
-    color: "#007AFF", // або будь-який синій
+    color: "#007AFF",
     textDecorationLine: "underline",
   },
   photoone: {

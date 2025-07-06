@@ -11,7 +11,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { ONBOARDING_SCREENS } from "../../constants";
 import OnboardingDots from "../../components/Dots";
 import { testimonials } from "../../constants";
-import ContinueButton from "../../components/ContinueButtons/ContinueButton";
+import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 const { width } = Dimensions.get("window");
 
 const currentDotsIndex = ONBOARDING_SCREENS.indexOf("EleventhScreen");
@@ -30,7 +30,7 @@ const EleventhScreen = ({ navigation }) => {
         currentIndex={currentDotsIndex}
         total={ONBOARDING_SCREENS.length}
       />
-      {/* Назва та стрілка */}
+
       <View style={styles.headerWrapper}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -49,7 +49,6 @@ const EleventhScreen = ({ navigation }) => {
         </View>
       </View>
 
-      {/* Карусель */}
       <View style={styles.carouselContainer}>
         <FlatList
           style={styles.list}
@@ -81,8 +80,6 @@ const EleventhScreen = ({ navigation }) => {
             </View>
           )}
         />
-
-        {/* Індикатори відгуків */}
         <View style={styles.dots}>
           {testimonials.map((_, i) => (
             <View
@@ -92,9 +89,11 @@ const EleventhScreen = ({ navigation }) => {
           ))}
         </View>
       </View>
-      <ContinueButton
+      <UniversalButton
         onPress={() =>
-          navigation.navigate("CheckCombined", { screenType: "TwelfthScreen" })
+          navigation.navigate("CheckCombined", {
+            screenType: "FinalRoomsScreen",
+          })
         }
       />
     </View>

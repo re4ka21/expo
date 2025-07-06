@@ -1,4 +1,4 @@
-// screens/ProfileScreen.js
+// ProfileScreen.js
 import React from "react";
 import {
   View,
@@ -7,21 +7,7 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Feather from "@expo/vector-icons/Feather";
-import Fontisto from "@expo/vector-icons/Fontisto";
-import Entypo from "@expo/vector-icons/Entypo";
-
-import Main from "../Main";
-import History from "../History";
-import Measure from "../Measure";
-
-const Tab = createBottomTabNavigator();
-
-/** --------------------------------------------------
- * 1. Кастомний TabBar, який використовує лише `options`
- * -------------------------------------------------*/
 const CustomTabBar = ({ state, descriptors, navigation }) => (
   <View style={styles.tabBar}>
     {state.routes.map((route, index) => {
@@ -60,50 +46,6 @@ const CustomTabBar = ({ state, descriptors, navigation }) => (
   </View>
 );
 
-/** --------------------------------------------------
- * 2. Основний Tab Navigator
- * -------------------------------------------------*/
-const ProfileScreen = () => (
-  <Tab.Navigator
-    screenOptions={{ headerShown: false, tabBarShowLabel: false }}
-    tabBar={(props) => <CustomTabBar {...props} />}
-  >
-    <Tab.Screen
-      name="Main"
-      component={Main}
-      options={{
-        title: "Redesign",
-        tabBarIcon: ({ color, size }) => (
-          <Feather name="star" size={size} color={color} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="History"
-      component={History}
-      options={{
-        title: "History",
-        tabBarIcon: ({ color, size }) => (
-          <Fontisto name="photograph" size={size} color={color} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Measure"
-      component={Measure}
-      options={{
-        title: "Measure",
-        tabBarIcon: ({ color, size }) => (
-          <Entypo name="ruler" size={size} color={color} />
-        ),
-      }}
-    />
-  </Tab.Navigator>
-);
-
-/** --------------------------------------------------
- * 3. Стилі
- * -------------------------------------------------*/
 const styles = StyleSheet.create({
   tabBar: {
     flexDirection: "row",
@@ -131,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default CustomTabBar;

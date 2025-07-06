@@ -8,44 +8,41 @@ import {
 } from "react-native";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import ContinueButton from "../../components/ContinueButtons/ContinueButton";
+import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 import OnboardingDots from "../../components/Dots";
 
 import {
   ONBOARDING_SCREENS,
-  SixthOptions,
-  SeventhOptions,
-  NinethOptions,
-  TenthOptions,
+  CurrentHomeFeelScreen,
+  SpaceAffectsMoodScreen,
+  RedesignExperienceScreen,
+  RedesignChallengesScreen,
 } from "../../constants";
-
 const dataMap = {
-  SixthScreen: {
-    options: SixthOptions,
+  CurrentHomeFeelScreen: {
+    options: CurrentHomeFeelScreen,
     question: "How do you feel about the\ncurrent state of your home?",
-    nextScreen: "SeventhScreen",
+    nextScreen: "SpaceAffectsMoodScreen",
   },
-  SeventhScreen: {
-    options: SeventhOptions,
+  SpaceAffectsMoodScreen: {
+    options: SpaceAffectsMoodScreen,
     question:
       "Do you agree that the\nquality of your living space\naffects your mood?",
     nextScreen: "Eighth",
   },
-  NinethScreen: {
-    options: NinethOptions,
+  RedesignExperienceScreen: {
+    options: RedesignExperienceScreen,
     question: "Do you have any experience with redesigning your home?",
-    nextScreen: "TenthScreen",
+    nextScreen: "RedesignChallengesScreen",
   },
-  TenthScreen: {
-    options: TenthOptions,
+  RedesignChallengesScreen: {
+    options: RedesignChallengesScreen,
     question: "What do you think could make redesigning your home difficult?",
     nextScreen: "Eleventh",
   },
 };
-
 const CombinedScreen = ({ navigation, route }) => {
-  // Отримуємо тип екрану з параметрів (припускаємо, що передається у route.params.screenType)
-  const screenType = route?.params?.screenType || "SixthScreen";
+  const screenType = route?.params?.screenType || "CurrentHomeFeelScreen";
 
   const { options, question, nextScreen } = dataMap[screenType];
   const handleContinue = () => {
@@ -56,14 +53,13 @@ const CombinedScreen = ({ navigation, route }) => {
     }
   };
   const currentIndex = ONBOARDING_SCREENS.indexOf(screenType);
-  // Замість масиву — одиночне значення, або null, якщо нічого не вибрано
   const [selected, setSelected] = useState(null);
 
   const toggleSelect = (id) => {
     if (selected === id) {
-      setSelected(null); // Зняти вибір, якщо натиснули ще раз на вже вибране
+      setSelected(null);
     } else {
-      setSelected(id); // Вибрати інший
+      setSelected(id);
     }
   };
   const renderItem = ({ item }) => {
@@ -107,7 +103,7 @@ const CombinedScreen = ({ navigation, route }) => {
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      <ContinueButton onPress={handleContinue} />
+      <UniversalButton onPress={handleContinue} />
     </View>
   );
 };

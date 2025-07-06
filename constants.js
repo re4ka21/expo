@@ -81,20 +81,20 @@ export const styleImages = {
   Tropical: require(".//assets/images/Tropical.png"),
 };
 export const ONBOARDING_SCREENS = [
-  "ThirdScreen",
-  "FourthScreen",
-  "FivethScreen",
-  "SixthScreen",
-  "SeventhScreen",
+  "DesiredResultsScreen",
+  "SelectRoomsScreen",
+  "LivingRoomStatsScreen",
+  "CurrentHomeFeelScreen",
+  "SpaceAffectsMoodScreen",
   "EighthScreen",
-  "NinethScreen",
-  "TenthScreen",
+  "RedesignExperienceScreen",
+  "RedesignChallengesScreen",
   "EleventhScreen",
-  "TwelfthScreen",
+  "FinalRoomsScreen",
   "ThirteenthScreen",
-  "FourteenthScreen",
+  "StyleRecommendationScreen",
 ];
-export const ThirdOptions = [
+export const DesiredResultsScreen = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,
@@ -121,7 +121,7 @@ export const ThirdOptions = [
     text: "Other",
   },
 ];
-export const FourthOptions = [
+export const SelectRoomsScreen = [
   {
     id: 1,
     icon: <MaterialCommunityIcons name="sofa" size={24} color="black" />,
@@ -160,7 +160,7 @@ export const carouselData = [
   { id: "4", image: require("./assets/images/Tropical.png") },
   { id: "5", image: require("./assets/images/Scandinavian.png") },
 ];
-export const SixthOptions = [
+export const CurrentHomeFeelScreen = [
   {
     id: 1,
     icon: <FontAwesome5 name="sad-cry" size={24} color="black" />,
@@ -187,7 +187,7 @@ export const SixthOptions = [
     text: "I absolutely love my home!",
   },
 ];
-export const SeventhOptions = [
+export const SpaceAffectsMoodScreen = [
   {
     id: 1,
     icon: <AntDesign name="like1" size={24} color="black" />,
@@ -209,7 +209,7 @@ export const SeventhOptions = [
     text: "Fully disagree",
   },
 ];
-export const NinethOptions = [
+export const RedesignExperienceScreen = [
   {
     id: 1,
     icon: <AntDesign name="like1" size={24} color="black" />,
@@ -226,7 +226,7 @@ export const NinethOptions = [
     text: "I wanted to do it, but didn’t date",
   },
 ];
-export const TenthOptions = [
+export const RedesignChallengesScreen = [
   {
     id: 1,
     icon: <FontAwesome5 name="money-bill-wave" size={24} color="black" />,
@@ -283,7 +283,7 @@ export const testimonials = [
     name: "Our user",
   },
 ];
-export const TwelfthOptions = [
+export const FinalRoomsScreen = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,

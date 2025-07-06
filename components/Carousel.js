@@ -1,5 +1,3 @@
-// components/Carousel.js
-
 import { Animated, Dimensions, Image, StyleSheet } from "react-native";
 
 const { width } = Dimensions.get("window");

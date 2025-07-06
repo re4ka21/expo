@@ -1,6 +1,5 @@
-// store/SelectedImagesSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import { styleImages } from "../constants"; // твоя константа
+import { styleImages } from "../constants";
 
 const initialState = {
   selectedImages: [],

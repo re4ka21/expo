@@ -21,19 +21,18 @@ const ThirteenthScreen = ({ navigation }) => {
   );
 
   const handleStyleSelect = (style) => {
-    navigation.navigate("Carousel", { screenType: "FourteenthScreen" });
+    navigation.navigate("Carousel", {
+      screenType: "StyleRecommendationScreen",
+    });
   };
 
   return (
     <View style={styles.container}>
-      {/* Dots */}
-
       <OnboardingDots
         currentIndex={currentIndex}
         total={ONBOARDING_SCREENS.length}
       />
 
-      {/* Title & Back */}
       <View style={styles.title}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome name="arrow-circle-left" size={32} color="#FC632B" />
@@ -43,7 +42,6 @@ const ThirteenthScreen = ({ navigation }) => {
         </Text>
       </View>
 
-      {/* Grid of Styles */}
       <FlatList
         data={filteredData}
         keyExtractor={(item) => item.name}

@@ -8,32 +8,31 @@ import {
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import CheckContinueButton from "../../components/ContinueButtons/CheckContinueButton";
+import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 import OnboardingDots from "../../components/Dots";
 
 import {
   ONBOARDING_SCREENS,
-  ThirdOptions,
-  FourthOptions,
-  TwelfthOptions,
+  DesiredResultsScreen,
+  SelectRoomsScreen,
+  FinalRoomsScreen,
 } from "../../constants";
-
 const dataMap = {
-  ThirdScreen: {
-    options: ThirdOptions,
+  DesiredResultsScreen: {
+    options: DesiredResultsScreen,
     question: "What results are you looking\nfor with Instant Remodel?",
-    nextScreen: "FourthScreen",
+    nextScreen: "SelectRoomsScreen",
     showBack: false,
   },
-  FourthScreen: {
-    options: FourthOptions,
+  SelectRoomsScreen: {
+    options: SelectRoomsScreen,
     question: "What rooms would you like\nto redesign?",
     nextScreen: (navigation) =>
-      navigation.navigate("Carousel", { screenType: "FivethScreen" }),
+      navigation.navigate("Carousel", { screenType: "LivingRoomStatsScreen" }),
     showBack: true,
   },
-  TwelfthScreen: {
-    options: TwelfthOptions,
+  FinalRoomsScreen: {
+    options: FinalRoomsScreen,
     question: "What rooms would you like\nto redesign?",
     nextScreen: "Thirteenth",
     showBack: true,
@@ -41,8 +40,7 @@ const dataMap = {
 };
 
 const CheckCombinedScreen = ({ navigation, route }) => {
-  // Отримуємо тип екрану з параметрів (припускаємо, що передається у route.params.screenType)
-  const screenType = route?.params?.screenType || "ThirdScreen";
+  const screenType = route?.params?.screenType || "DesiredResultsScreen";
 
   const { options, question, nextScreen, showBack } = dataMap[screenType];
   const handleContinue = () => {
@@ -118,7 +116,7 @@ const CheckCombinedScreen = ({ navigation, route }) => {
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      <CheckContinueButton
+      <UniversalButton
         onPress={handleContinue}
         disabled={checked.length === 0}
       />
