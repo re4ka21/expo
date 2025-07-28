@@ -1,4 +1,3 @@
-// ProfileScreen.js
 import React from "react";
 import {
   View,
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     marginHorizontal: 16,
-    marginBottom: Platform.OS === "ios" ? 24 : 12,
+    marginBottom: Platform.OS === "ios" ? 24 : 30,
     paddingVertical: 12,
     borderRadius: 32,
     backgroundColor: "#fff",

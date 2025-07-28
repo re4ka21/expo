@@ -1,6 +1,5 @@
-// navigation/MainTabNavigator.js
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Main from "../screeens/Main";
+import MainStack from "./MainStack";
 import History from "../screeens/History";
 import Measure from "../screeens/Measure";
 import CustomTabBar from "../components/CustomTabBar";
@@ -14,8 +13,8 @@ export default function MainTabNavigator() {
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tab.Screen
-        name="Main"
-        component={Main}
+        name="MainStack"
+        component={MainStack}
         options={{ title: "Redesign" }}
       />
       <Tab.Screen

@@ -97,7 +97,7 @@ const Main = () => {
         <Text style={styles.text}>Instant remodel</Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => console.log("aaa")}
+          onPress={() => navigation.navigate("MainStack", { screen: "Pay" })}
         >
           <Text style={styles.buttonText}>Upgrade </Text>
         </TouchableOpacity>

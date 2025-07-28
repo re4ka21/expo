@@ -47,7 +47,7 @@ const ResultScreen = () => {
   );
 
   const cancel = () => {
-    navigation.navigate("Profile");
+    navigation.navigate("Main");
   };
   const handlePress = () => {
     navigation.replace("Result");
