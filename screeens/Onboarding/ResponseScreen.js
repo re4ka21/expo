@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
 
     elevation: 2,
-    height: 205, // 🧩 додаємо висоту
+    height: 205, 
   },
 
   reviewText: {

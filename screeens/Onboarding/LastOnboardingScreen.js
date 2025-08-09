@@ -7,10 +7,10 @@ const FiveteenthScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Виставляємо прапорець завершення онбордингу
+ 
     dispatch(setOnboardingDone(true));
 
-    // Через 2 секунди переходимо до головного екрану
+  
     const timer = setTimeout(() => {
       navigation.replace("Main");
     }, 2000);

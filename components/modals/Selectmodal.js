@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedRoom } from "../../redux/ModalSelectionSlice";
+
 
 const SelectModal = ({ visible, onClose, data, onSelect }) => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const SelectModal = ({ visible, onClose, data, onSelect }) => {
               <TouchableOpacity
                 style={styles.item}
                 onPress={() => {
-                  if (onSelect) onSelect(item.name); // просто виклик колбеку
+                  if (onSelect) onSelect(item.name); 
                   onClose();
                 }}
               >

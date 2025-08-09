@@ -1,4 +1,4 @@
-// navigation/OnboardingStack.js
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FirstScreen from "../screeens/Onboarding/FirstLoadingScreen";
 import SecondScreen from "../screeens/Onboarding/SecondScreen";

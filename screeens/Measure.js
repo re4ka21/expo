@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-const App = () => {
+const Measure = () => {
   const [message, setMessage] = useState("Привіт, світ!");
 
   const handlePress = () => {
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Measure;

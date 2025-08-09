@@ -1,4 +1,4 @@
-// navigation/RootNavigator.js
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import OnboardingStack from "./OnboardingStack";
 import MainTabNavigator from "./MainTabNavigator";

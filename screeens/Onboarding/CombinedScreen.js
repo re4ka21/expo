@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   selectedButton: {
-    backgroundColor: "#969696", // або будь-який колір для виділення
+    backgroundColor: "#969696", 
   },
   saveButtonText: {
     fontSize: 16,

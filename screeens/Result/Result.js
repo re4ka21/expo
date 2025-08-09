@@ -58,12 +58,10 @@ const ResultScreen = () => {
         styleImages[selectedImages[selectedImages.length - 1]];
       if (!imageModule) return;
 
-      // Завантажуємо require-зображення у файлову систему
       const asset = Asset.fromModule(imageModule);
       await asset.downloadAsync();
       const localUri = asset.localUri;
 
-      // Запит дозволу
       const { status } = await MediaLibrary.requestPermissionsAsync();
       if (status !== "granted") {
         alert("Permission to access media library is required!");
@@ -145,15 +143,7 @@ const ResultScreen = () => {
                 style={styles.selector}
                 onPress={() => setModalVisibleRoom(true)}
               >
-                <View
-                  style={{
-                    width: 17,
-                    height: 22,
-                    marginLeft: 120,
-                    bottom: 5,
-                    position: "absolute",
-                  }}
-                >
+                <View style={styles.roomicondown}>
                   <AntDesign name="down" size={20} color="black" />
                 </View>
                 <Text style={styles.selectorText}>
@@ -166,7 +156,7 @@ const ResultScreen = () => {
                 onClose={() => setModalVisibleRoom(false)}
                 data={room}
                 type="room"
-                onSelect={(name) => setSelectedRoom(name)} // зберігає вибір
+                onSelect={(name) => setSelectedRoom(name)}
                 selected={selectedRoom}
               />
             </View>
@@ -183,15 +173,7 @@ const ResultScreen = () => {
                   {selectedAI || "Select Level"}
                 </Text>
               </TouchableOpacity>
-              <View
-                style={{
-                  width: 17,
-                  height: 22,
-                  marginLeft: 145,
-                  bottom: 15,
-                  position: "absolute",
-                }}
-              >
+              <View style={styles.aiicondown}>
                 <AntDesign name="down" size={20} color="black" />
               </View>
 
@@ -229,15 +211,7 @@ const ResultScreen = () => {
                   {selectedStyle || "Artdeco"}
                 </Text>
               </TouchableOpacity>
-              <View
-                style={{
-                  width: 17,
-                  height: 22,
-                  marginLeft: 148,
-                  bottom: 30,
-                  position: "absolute",
-                }}
-              >
+              <View style={styles.styleicondown}>
                 <AntDesign name="down" size={20} color="black" />
               </View>
               <StyleModal
@@ -334,6 +308,20 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 12,
   },
+  roomicondown: {
+    width: 17,
+    height: 22,
+    marginLeft: 120,
+    bottom: 5,
+    position: "absolute",
+  },
+  styleicondown: {
+    width: 17,
+    height: 22,
+    marginLeft: 148,
+    bottom: 30,
+    position: "absolute",
+  },
   modalphoto: {
     width: 150,
     height: 150,
@@ -346,7 +334,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-
+  aiicondown: {
+    width: 17,
+    height: 22,
+    marginLeft: 145,
+    bottom: 15,
+    position: "absolute",
+  },
   buttonredesign: {
     backgroundColor: "#FC632B",
     paddingVertical: 15,

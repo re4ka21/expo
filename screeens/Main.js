@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -159,15 +159,7 @@ const Main = () => {
               style={styles.selector}
               onPress={() => setModalVisibleRoom(true)}
             >
-              <View
-                style={{
-                  width: 17,
-                  height: 22,
-                  marginLeft: 120,
-                  bottom: 5,
-                  position: "absolute",
-                }}
-              >
+              <View style={styles.roomicondown}>
                 <AntDesign name="down" size={20} color="black" />
               </View>
               <Text style={styles.selectorText}>
@@ -195,15 +187,7 @@ const Main = () => {
                 {selectedAI || "Select Level"}
               </Text>
             </TouchableOpacity>
-            <View
-              style={{
-                width: 17,
-                height: 22,
-                marginLeft: 145,
-                bottom: 15,
-                position: "absolute",
-              }}
-            >
+            <View style={styles.aiicondown}>
               <AntDesign name="down" size={20} color="black" />
             </View>
             <SelectModal
@@ -239,15 +223,7 @@ const Main = () => {
                 {selectedStyle || "Select Style"}
               </Text>
             </TouchableOpacity>
-            <View
-              style={{
-                width: 17,
-                height: 22,
-                marginLeft: 148,
-                bottom: 30,
-                position: "absolute",
-              }}
-            >
+            <View style={styles.styleicondown}>
               <AntDesign name="down" size={20} color="black" />
             </View>
             <StyleModal
@@ -409,6 +385,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 10,
   },
+  roomicondown: {
+    width: 17,
+    height: 22,
+    marginLeft: 120,
+    bottom: 5,
+    position: "absolute",
+  },
   modalphoto: {
     width: 150,
     height: 150,
@@ -417,11 +400,31 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginTop: 16,
   },
+  styledownicon: {
+    width: 17,
+    height: 22,
+    marginLeft: 148,
+    bottom: 30,
+    position: "absolute",
+  },
   selectorText: {
     fontSize: 16,
     fontWeight: "bold",
   },
-
+  aiicondown: {
+    width: 17,
+    height: 22,
+    marginLeft: 145,
+    bottom: 15,
+    position: "absolute",
+  },
+  styleicondown: {
+    width: 17,
+    height: 22,
+    marginLeft: 148,
+    bottom: 30,
+    position: "absolute",
+  },
   bottomButtonWrapper: {
     position: "absolute",
     bottom: 15,

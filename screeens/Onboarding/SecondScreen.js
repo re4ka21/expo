@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const SecondScreen = ({ navigation }) => {

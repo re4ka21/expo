@@ -24,7 +24,7 @@ const StyleModal = ({ visible, onClose, data, onSelect }) => {
 
   const handleSelect = (name) => {
     dispatch(setSelectedStyle(name));
-    if (onSelect) onSelect(name); // ОНОВЛЕННЯ локального стану
+    if (onSelect) onSelect(name); 
     onClose();
   };
 
