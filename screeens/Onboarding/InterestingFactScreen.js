@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS } from "../../constants";
+import { ONBOARDING_SCREENS } from "../../constants/constants";
 import OnboardingDots from "../../components/Dots";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 const EighthScreen = ({ navigation }) => {

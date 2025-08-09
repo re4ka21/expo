@@ -23,7 +23,7 @@ import * as MediaLibrary from "expo-media-library";
 
 import * as Sharing from "expo-sharing";
 import { Asset } from "expo-asset";
-import { room, rooms, stylesList, styleImages } from "../../constants";
+import { room, rooms, stylesList } from "../../constants/modalconstants";
 const ResultScreen = () => {
   const navigation = useNavigation();
   const [selectedRoom, setSelectedRoom] = useState(null);

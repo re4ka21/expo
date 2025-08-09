@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS, carouselData } from "../../constants";
+import { ONBOARDING_SCREENS, carouselData } from "../../constants/constants";
 import OnboardingDots from "../../components/Dots";
 import Carousel from "../../components/Carousel";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";

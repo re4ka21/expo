@@ -14,7 +14,12 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "@react-navigation/native";
 import StyleModal from "../components/modals/Stylemodal";
 import SelectModal from "../components/modals/Selectmodal";
-import { room, rooms, stylesList, styleImages } from "../constants";
+import {
+  room,
+  rooms,
+  stylesList,
+  styleImages,
+} from "../constants/modalconstants";
 import { useSelector, useDispatch } from "react-redux";
 
 import {

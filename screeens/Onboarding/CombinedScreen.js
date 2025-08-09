@@ -17,7 +17,7 @@ import {
   SpaceAffectsMoodScreen,
   RedesignExperienceScreen,
   RedesignChallengesScreen,
-} from "../../constants";
+} from "../../constants/combscreenconstants";
 const dataMap = {
   CurrentHomeFeelScreen: {
     options: CurrentHomeFeelScreen,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   selectedButton: {
-    backgroundColor: "#969696", 
+    backgroundColor: "#969696",
   },
   saveButtonText: {
     fontSize: 16,

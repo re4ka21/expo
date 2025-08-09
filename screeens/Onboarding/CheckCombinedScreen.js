@@ -16,7 +16,7 @@ import {
   DesiredResultsScreen,
   SelectRoomsScreen,
   FinalRoomsScreen,
-} from "../../constants";
+} from "../../constants/combscreenconstants";
 const dataMap = {
   DesiredResultsScreen: {
     options: DesiredResultsScreen,
