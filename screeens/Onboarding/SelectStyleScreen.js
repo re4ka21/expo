@@ -9,7 +9,7 @@ import {
   ImageBackground,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { stylesList } from "../../constants/constants";
+import { stylesList } from "../../constants/modalconstants";
 import { ONBOARDING_SCREENS } from "../../constants/constants";
 import OnboardingDots from "../../components/Dots";
 const currentIndex = ONBOARDING_SCREENS.indexOf("ThirteenthScreen");
