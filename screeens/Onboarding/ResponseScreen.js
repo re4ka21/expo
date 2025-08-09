@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS, testimonials } from "../../constants/constants";
+import { ONBOARDING_SCREENS, testimonials } from "../../constants/different";
 import OnboardingDots from "../../components/Dots";
 
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";

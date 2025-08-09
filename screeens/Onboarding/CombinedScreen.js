@@ -17,7 +17,7 @@ import {
   SpaceAffectsMoodScreen,
   RedesignExperienceScreen,
   RedesignChallengesScreen,
-} from "../../constants/combscreenconstants";
+} from "../../constants/combinedscreen";
 const dataMap = {
   CurrentHomeFeelScreen: {
     options: CurrentHomeFeelScreen,
