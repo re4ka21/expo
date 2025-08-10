@@ -23,7 +23,7 @@ import * as MediaLibrary from "expo-media-library";
 
 import * as Sharing from "expo-sharing";
 import { Asset } from "expo-asset";
-import { room, rooms, stylesList } from "../../constants/modal";
+import { ROOM, ROOMS, STYLES_LIST } from "../../constants/roomDesign";
 const ResultScreen = () => {
   const navigation = useNavigation();
   const [selectedRoom, setSelectedRoom] = useState(null);
@@ -154,7 +154,7 @@ const ResultScreen = () => {
               <SelectModal
                 visible={modalVisibleRoom}
                 onClose={() => setModalVisibleRoom(false)}
-                data={room}
+                data={ROOM}
                 type="room"
                 onSelect={(name) => setSelectedRoom(name)}
                 selected={selectedRoom}
@@ -180,7 +180,7 @@ const ResultScreen = () => {
               <SelectModal
                 visible={modalVisibleAI}
                 onClose={() => setModalVisibleAI(false)}
-                data={rooms}
+                data={ROOMS}
                 onSelect={setSelectedAI}
                 type="AI"
                 selected={selectedAI}
@@ -217,7 +217,7 @@ const ResultScreen = () => {
               <StyleModal
                 visible={modalVisibleStyle}
                 onClose={() => setModalVisibleStyle(false)}
-                data={stylesList}
+                data={STYLES_LIST}
                 onSelect={(style) => setSelectedStyle(style)}
               />
               {selectedStyleObj && selectedStyleObj.description ? (

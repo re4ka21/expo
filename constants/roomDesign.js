@@ -1,4 +1,4 @@
-export const room = [
+export const ROOM = [
   { name: "Living room" },
   { name: "Bedroom" },
   { name: "Bathroom" },
@@ -15,7 +15,7 @@ export const room = [
   { name: "Coffee shop" },
   { name: "Restaurant" },
 ];
-export const rooms = [
+export const ROOMS = [
   {
     name: "Soft",
     description: "Green, sunny, colorful.",
@@ -33,7 +33,7 @@ export const rooms = [
     description: "Green, sunny, colorful.",
   },
 ];
-export const stylesList = [
+export const STYLES_LIST = [
   {
     name: "Artdeco",
     image: require("./assets/images/Artdeco.png"),
@@ -65,7 +65,7 @@ export const stylesList = [
     description: "Green, sunny, colorful.",
   },
 ];
-export const styleImages = {
+export const STYLE_IMAGES = {
   Artdeco: require("./assets/images/Artdeco.png"),
   Bauhaus: require("./assets/images/Bauhaus.png"),
   Futuristic: require("./assets/images/Futuristic.png"),

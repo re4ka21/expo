@@ -5,7 +5,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-export const DesiredResultsScreen = [
+export const USER_GOALS_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,
@@ -32,7 +32,7 @@ export const DesiredResultsScreen = [
     text: "Other",
   },
 ];
-export const SelectRoomsScreen = [
+export const ROOM_OPTIONS = [
   {
     id: 1,
     icon: <MaterialCommunityIcons name="sofa" size={24} color="black" />,
@@ -64,7 +64,7 @@ export const SelectRoomsScreen = [
     text: "other",
   },
 ];
-export const CurrentHomeFeelScreen = [
+export const HOME_FEEL_OPTIONS = [
   {
     id: 1,
     icon: <FontAwesome5 name="sad-cry" size={24} color="black" />,
@@ -91,7 +91,7 @@ export const CurrentHomeFeelScreen = [
     text: "I absolutely love my home!",
   },
 ];
-export const SpaceAffectsMoodScreen = [
+export const SPACE_MOOD_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="like1" size={24} color="black" />,
@@ -113,7 +113,7 @@ export const SpaceAffectsMoodScreen = [
     text: "Fully disagree",
   },
 ];
-export const RedesignExperienceScreen = [
+export const REDESIGN_EXPERIENCE_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="like1" size={24} color="black" />,
@@ -130,7 +130,7 @@ export const RedesignExperienceScreen = [
     text: "I wanted to do it, but didn’t date",
   },
 ];
-export const RedesignChallengesScreen = [
+export const REDESIGN_CHALLENGES_OPTIONS = [
   {
     id: 1,
     icon: <FontAwesome5 name="money-bill-wave" size={24} color="black" />,
@@ -164,7 +164,7 @@ export const RedesignChallengesScreen = [
     text: "Other",
   },
 ];
-export const FinalRoomsScreen = [
+export const DESIGN_UPGRADE_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,

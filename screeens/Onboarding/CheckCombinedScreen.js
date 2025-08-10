@@ -13,26 +13,26 @@ import OnboardingDots from "../../components/Dots";
 
 import {
   ONBOARDING_SCREENS,
-  DesiredResultsScreen,
-  SelectRoomsScreen,
-  FinalRoomsScreen,
-} from "../../constants/combinedscreen";
+  USER_GOALS_OPTIONS,
+  ROOM_OPTIONS,
+  DESIGN_UPGRADE_OPTIONS,
+} from "./onBoardingQuestions";
 const dataMap = {
   DesiredResultsScreen: {
-    options: DesiredResultsScreen,
+    options: USER_GOALS_OPTIONS,
     question: "What results are you looking\nfor with Instant Remodel?",
     nextScreen: "SelectRoomsScreen",
     showBack: false,
   },
   SelectRoomsScreen: {
-    options: SelectRoomsScreen,
+    options: ROOM_OPTIONS,
     question: "What rooms would you like\nto redesign?",
     nextScreen: (navigation) =>
       navigation.navigate("Carousel", { screenType: "LivingRoomStatsScreen" }),
     showBack: true,
   },
   FinalRoomsScreen: {
-    options: FinalRoomsScreen,
+    options: DESIGN_UPGRADE_OPTIONS,
     question: "What rooms would you like\nto redesign?",
     nextScreen: "Thirteenth",
     showBack: true,

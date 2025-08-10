@@ -14,7 +14,12 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "@react-navigation/native";
 import StyleModal from "../components/modals/Stylemodal";
 import SelectModal from "../components/modals/Selectmodal";
-import { room, rooms, stylesList, styleImages } from "../constants/modal";
+import {
+  ROOM,
+  ROOMS,
+  STYLES_LIST,
+  STYLE_IMAGES,
+} from "../constants/roomDesign";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -169,7 +174,7 @@ const Main = () => {
             <SelectModal
               visible={modalVisibleRoom}
               onClose={() => setModalVisibleRoom(false)}
-              data={room}
+              data={ROOM}
               onSelect={handleSelectRoom}
               selected={selectedRoom}
             />
@@ -193,7 +198,7 @@ const Main = () => {
             <SelectModal
               visible={modalVisibleAI}
               onClose={() => setModalVisibleAI(false)}
-              data={rooms}
+              data={ROOM}
               onSelect={handleSelectAI}
               selected={selectedAI}
             />
@@ -202,9 +207,9 @@ const Main = () => {
         {/* Style */}
         <View style={styles.pickerWrapperphoto}>
           <TouchableOpacity onPress={() => setModalVisibleStyle(true)}>
-            {(selectedStyle && styleImages[selectedStyle] && (
+            {(selectedStyle && STYLE_IMAGES[selectedStyle] && (
               <Image
-                source={styleImages[selectedStyle]}
+                source={STYLE_IMAGES[selectedStyle]}
                 style={styles.modalphoto}
                 resizeMode="contain"
               />
@@ -229,7 +234,7 @@ const Main = () => {
             <StyleModal
               visible={modalVisibleStyle}
               onClose={() => setModalVisibleStyle(false)}
-              data={stylesList}
+              data={STYLES_LIST}
               onSelect={handleSelectStyle}
             />
             {selectedStyleObj && selectedStyleObj.description ? (

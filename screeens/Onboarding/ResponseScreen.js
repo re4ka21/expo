@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS, testimonials } from "../../constants/different";
+import { ONBOARDING_SCREENS } from "../../constants/OnboardingScreen";
+import { RESPONSE_APP } from "./responseConstant";
 import OnboardingDots from "../../components/Dots";
 
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
@@ -52,7 +53,7 @@ const EleventhScreen = ({ navigation }) => {
       <View style={styles.carouselContainer}>
         <FlatList
           style={styles.list}
-          data={testimonials}
+          data={RESPONSE_APP}
           onScroll={handleScroll}
           scrollEventThrottle={16}
           horizontal

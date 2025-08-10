@@ -8,7 +8,8 @@ import {
   Dimensions,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS, carouselData } from "../../constants/different";
+import { ONBOARDING_SCREENS } from "../../constants/OnboardingScreen";
+import { CAROUSEL_IMAGES } from "./imageConstant";
 import OnboardingDots from "../../components/Dots";
 import Carousel from "../../components/Carousel";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
@@ -75,7 +76,11 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
           <Text style={styles.titleText}>{title}</Text>
         )}
       </View>
-      <Carousel data={carouselData} scrollX={scrollX} style={styles.carousel} />
+      <Carousel
+        data={CAROUSEL_IMAGES}
+        scrollX={scrollX}
+        style={styles.carousel}
+      />
 
       <View style={styles.textContainer}>
         {number && (
