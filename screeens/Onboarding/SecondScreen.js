@@ -1,4 +1,3 @@
-
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const SecondScreen = ({ navigation }) => {

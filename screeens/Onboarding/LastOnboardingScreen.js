@@ -7,10 +7,8 @@ const FiveteenthScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
- 
     dispatch(setOnboardingDone(true));
 
-  
     const timer = setTimeout(() => {
       navigation.replace("Main");
     }, 2000);
