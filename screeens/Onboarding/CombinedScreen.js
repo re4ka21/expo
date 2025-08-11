@@ -10,14 +10,13 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 import OnboardingDots from "../../components/Dots";
-
+import { ONBOARDING_SCREENS } from "../../constants/OnboardingScreens";
 import {
-  ONBOARDING_SCREENS,
   HOME_FEEL_OPTIONS,
   SPACE_MOOD_OPTIONS,
   REDESIGN_EXPERIENCE_OPTIONS,
   REDESIGN_CHALLENGES_OPTIONS,
-} from "./onBoardingQuestions";
+} from "./onboardingQuestions";
 const dataMap = {
   CurrentHomeFeelScreen: {
     options: HOME_FEEL_OPTIONS,
