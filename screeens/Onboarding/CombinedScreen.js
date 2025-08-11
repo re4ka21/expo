@@ -10,33 +10,32 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 import OnboardingDots from "../../components/Dots";
-
+import { ONBOARDING_SCREENS } from "../../constants/OnboardingScreens";
 import {
-  ONBOARDING_SCREENS,
-  CurrentHomeFeelScreen,
-  SpaceAffectsMoodScreen,
-  RedesignExperienceScreen,
-  RedesignChallengesScreen,
-} from "../../constants";
+  HOME_FEEL_OPTIONS,
+  SPACE_MOOD_OPTIONS,
+  REDESIGN_EXPERIENCE_OPTIONS,
+  REDESIGN_CHALLENGES_OPTIONS,
+} from "./onboardingQuestions";
 const dataMap = {
   CurrentHomeFeelScreen: {
-    options: CurrentHomeFeelScreen,
+    options: HOME_FEEL_OPTIONS,
     question: "How do you feel about the\ncurrent state of your home?",
     nextScreen: "SpaceAffectsMoodScreen",
   },
   SpaceAffectsMoodScreen: {
-    options: SpaceAffectsMoodScreen,
+    options: SPACE_MOOD_OPTIONS,
     question:
       "Do you agree that the\nquality of your living space\naffects your mood?",
     nextScreen: "Eighth",
   },
   RedesignExperienceScreen: {
-    options: RedesignExperienceScreen,
+    options: REDESIGN_EXPERIENCE_OPTIONS,
     question: "Do you have any experience with redesigning your home?",
     nextScreen: "RedesignChallengesScreen",
   },
   RedesignChallengesScreen: {
-    options: RedesignChallengesScreen,
+    options: REDESIGN_CHALLENGES_OPTIONS,
     question: "What do you think could make redesigning your home difficult?",
     nextScreen: "Eleventh",
   },
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   selectedButton: {
-    backgroundColor: "#969696", 
+    backgroundColor: "#969696",
   },
   saveButtonText: {
     fontSize: 16,

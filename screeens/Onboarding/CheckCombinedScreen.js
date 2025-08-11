@@ -10,30 +10,29 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
 import OnboardingDots from "../../components/Dots";
-
+import { ONBOARDING_SCREENS } from "../../constants/OnboardingScreens";
 import {
-  ONBOARDING_SCREENS,
-  DesiredResultsScreen,
-  SelectRoomsScreen,
-  FinalRoomsScreen,
-} from "../../constants";
+  USER_GOALS_OPTIONS,
+  ROOM_OPTIONS,
+  DESIGN_UPGRADE_OPTIONS,
+} from "./onboardingQuestions";
 const dataMap = {
   DesiredResultsScreen: {
-    options: DesiredResultsScreen,
+    options: USER_GOALS_OPTIONS,
     question: "What results are you looking\nfor with Instant Remodel?",
     nextScreen: "SelectRoomsScreen",
     showBack: false,
   },
   SelectRoomsScreen: {
-    options: SelectRoomsScreen,
+    options: ROOM_OPTIONS,
     question: "What rooms would you like\nto redesign?",
     nextScreen: (navigation) =>
       navigation.navigate("Carousel", { screenType: "LivingRoomStatsScreen" }),
     showBack: true,
   },
   FinalRoomsScreen: {
-    options: FinalRoomsScreen,
-    question: "What rooms would you like\nto redesign?",
+    options: DESIGN_UPGRADE_OPTIONS,
+    question: "What rooms would you like\nto improve?",
     nextScreen: "Thirteenth",
     showBack: true,
   },
@@ -44,7 +43,7 @@ const CheckCombinedScreen = ({ navigation, route }) => {
 
   const { options, question, nextScreen, showBack } = dataMap[screenType];
   const handleContinue = () => {
-    if (typeof nextScreen === "function") {
+    if (Object.prototype.toString.call(nextScreen) === "[object Function]") {
       nextScreen(navigation);
     } else if (dataMap[nextScreen]) {
       navigation.push("CheckCombined", { screenType: nextScreen });

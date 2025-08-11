@@ -8,7 +8,8 @@ import {
   Dimensions,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { ONBOARDING_SCREENS, carouselData } from "../../constants";
+import { ONBOARDING_SCREENS } from "../../constants/OnboardingScreens";
+import { CAROUSEL_IMAGES } from "./imageConstant";
 import OnboardingDots from "../../components/Dots";
 import Carousel from "../../components/Carousel";
 import UniversalButton from "../../components/ContinueButtons/UniversalButton";
@@ -41,7 +42,7 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const handleContinue = () => {
-    if (typeof nextScreen === "function") {
+    if (Object.prototype.toString.call(nextScreen) === "[object Function]") {
       nextScreen(navigation);
     } else {
       navigation.navigate(nextScreen);
@@ -75,7 +76,11 @@ const CombinedCarouselScreen = ({ navigation, route }) => {
           <Text style={styles.titleText}>{title}</Text>
         )}
       </View>
-      <Carousel data={carouselData} scrollX={scrollX} style={styles.carousel} />
+      <Carousel
+        data={CAROUSEL_IMAGES}
+        scrollX={scrollX}
+        style={styles.carousel}
+      />
 
       <View style={styles.textContainer}>
         {number && (

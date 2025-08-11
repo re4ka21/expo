@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { styleImages } from "../constants";
+import { styleImages } from "../constants/constants";
 
 const initialState = {
   selectedImages: [],

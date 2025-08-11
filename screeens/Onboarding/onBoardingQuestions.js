@@ -5,96 +5,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-export const room = [
-  { name: "Living room" },
-  { name: "Bedroom" },
-  { name: "Bathroom" },
-  { name: "Kitchen" },
-  { name: "Dining room" },
-  { name: "Attic" },
-  { name: "Study" },
-  { name: "Kids room" },
-  { name: "Formal dining room" },
-  { name: "Home theatre" },
-  { name: "Balcony" },
-  { name: "Workshop" },
-  { name: "Gym" },
-  { name: "Coffee shop" },
-  { name: "Restaurant" },
-];
-export const rooms = [
-  {
-    name: "Soft",
-    description: "Green, sunny, colorful.",
-  },
-  {
-    name: "Balanced",
-    description: "Green, sunny, colorful.",
-  },
-  {
-    name: "Strong",
-    description: "Green, sunny, colorful.",
-  },
-  {
-    name: "Extreme",
-    description: "Green, sunny, colorful.",
-  },
-];
-export const stylesList = [
-  {
-    name: "Artdeco",
-    image: require("./assets/images/Artdeco.png"),
-    description: "Bright, airy, clean",
-  },
-  {
-    name: "Bauhaus",
-    image: require("./assets/images/Bauhaus.png"),
-    description: "Minimal, clear, purposeful",
-  },
-  {
-    name: "Futuristic",
-    image: require("./assets/images/Futuristic.png"),
-    description: "Bright, airy, clean",
-  },
-  {
-    name: "Japanese",
-    image: require("./assets/images/Japanese.png"),
-    description: "Bright, airy, clean",
-  },
-  {
-    name: "Scandinavian",
-    image: require("./assets/images/Scandinavian.png"),
-    description: "Bright, airy, clean",
-  },
-  {
-    name: "Tropical",
-    image: require(".//assets/images/Tropical.png"),
-    description: "Green, sunny, colorful.",
-  },
-];
-export const styleImages = {
-  Artdeco: require("./assets/images/Artdeco.png"),
-  Bauhaus: require("./assets/images/Bauhaus.png"),
-  Futuristic: require("./assets/images/Futuristic.png"),
-  Japanese: require("./assets/images/Japanese.png"),
-  Scandinavian: require("./assets/images/Scandinavian.png"),
-  Tropical: require(".//assets/images/Tropical.png"),
-};
-export const ONBOARDING_SCREENS = [
-  "DesiredResultsScreen",
-  "SelectRoomsScreen",
-  "LivingRoomStatsScreen",
-  "CurrentHomeFeelScreen",
-  "SpaceAffectsMoodScreen",
-  "EighthScreen",
-  "RedesignExperienceScreen",
-  "RedesignChallengesScreen",
-  "EleventhScreen",
-  "FinalRoomsScreen",
-  "ThirteenthScreen",
-  "StyleRecommendationScreen",
-];
-export const DesiredResultsScreen = [
+export const USER_GOALS_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,
@@ -121,7 +32,7 @@ export const DesiredResultsScreen = [
     text: "Other",
   },
 ];
-export const SelectRoomsScreen = [
+export const ROOM_OPTIONS = [
   {
     id: 1,
     icon: <MaterialCommunityIcons name="sofa" size={24} color="black" />,
@@ -153,14 +64,7 @@ export const SelectRoomsScreen = [
     text: "other",
   },
 ];
-export const carouselData = [
-  { id: "1", image: require("./assets/images/Artdeco.png") },
-  { id: "2", image: require("./assets/images/Bauhaus.png") },
-  { id: "3", image: require("./assets/images/Japanese.png") },
-  { id: "4", image: require("./assets/images/Tropical.png") },
-  { id: "5", image: require("./assets/images/Scandinavian.png") },
-];
-export const CurrentHomeFeelScreen = [
+export const HOME_FEEL_OPTIONS = [
   {
     id: 1,
     icon: <FontAwesome5 name="sad-cry" size={24} color="black" />,
@@ -187,7 +91,7 @@ export const CurrentHomeFeelScreen = [
     text: "I absolutely love my home!",
   },
 ];
-export const SpaceAffectsMoodScreen = [
+export const SPACE_MOOD_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="like1" size={24} color="black" />,
@@ -209,7 +113,7 @@ export const SpaceAffectsMoodScreen = [
     text: "Fully disagree",
   },
 ];
-export const RedesignExperienceScreen = [
+export const REDESIGN_EXPERIENCE_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="like1" size={24} color="black" />,
@@ -226,7 +130,7 @@ export const RedesignExperienceScreen = [
     text: "I wanted to do it, but didn’t date",
   },
 ];
-export const RedesignChallengesScreen = [
+export const REDESIGN_CHALLENGES_OPTIONS = [
   {
     id: 1,
     icon: <FontAwesome5 name="money-bill-wave" size={24} color="black" />,
@@ -260,30 +164,7 @@ export const RedesignChallengesScreen = [
     text: "Other",
   },
 ];
-export const testimonials = [
-  {
-    id: "1",
-    text: "Like Having a Pro at home",
-    maintext:
-      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
-    name: "Our user",
-  },
-  {
-    id: "2",
-    text: "Like Having a Pro at home",
-    maintext:
-      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
-    name: "Our user",
-  },
-  {
-    id: "3",
-    text: "Like Having a Pro at home",
-    maintext:
-      "Recently started remodeling our bedroom and I was stuck for ideas. Tried this app out of curiosity and I'm so glad I did! It's like having a professional help.",
-    name: "Our user",
-  },
-];
-export const FinalRoomsScreen = [
+export const DESIGN_UPGRADE_OPTIONS = [
   {
     id: 1,
     icon: <AntDesign name="star" size={24} color="black" />,
